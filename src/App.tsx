@@ -1,6 +1,9 @@
+import { Routes, Route } from 'react-router-dom'
 import { Sidebar } from './components/sidebar'
+import { OverviewPage } from './components/overview'
+import { User } from './components/user'
 
-function App({ }) {
+function App() {
   console.log(name)
   return (
     <>
@@ -13,7 +16,10 @@ function App({ }) {
         </div>
 
         <Sidebar />
-       
+        <Routes>
+          <Route path='/' element={<OverviewPage />} />
+          <Route path='/user' element={<User />} />
+        </Routes>
       </div>
     </>
   )
