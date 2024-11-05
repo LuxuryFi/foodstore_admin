@@ -7,11 +7,11 @@ const SIDEBAR_ITEMS = [
   { name: 'Homepage', icon: BarChart, color: '#ffffff', path: '/' },
   { name: 'User', icon: User2Icon, color: '#ffffff', path: '/user' },
   { name: 'Internal User', icon: UserSquare2, color: '#ffffff', path: '/internal' },
-  { name: 'Product', icon: User2Icon, color: '#EC4899', path: '/category' },
-  { name: 'Product', icon: User2Icon, color: '#F59E0B', path: '/category' },
+  { name: 'Category', icon: User2Icon, color: '#EC4899', path: '/category' },
+  { name: 'Product', icon: User2Icon, color: '#F59E0B', path: '/product' },
   { name: 'Order', icon: ShoppingBag, color: '#6EE7B7', path: '/order' },
-  { name: 'Product', icon: CoinsIcon, color: '#3b82f6', path: '/category' },
-  { name: 'Product', icon: Drumstick, color: '#8b5cf6', path: '/category' }
+  { name: 'Banner', icon: CoinsIcon, color: '#3b82f6', path: '/banner' },
+  { name: 'Discount', icon: Drumstick, color: '#8b5cf6', path: '/discount' }
 ]
 
 export const Sidebar = () => {

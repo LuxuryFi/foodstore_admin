@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { StatCard } from '../common/StatCard'
 import { DollarSignIcon, ShoppingBag, StickyNote, Users } from 'lucide-react'
 import { SalesOverviewChart } from './SalesOverviewChart'
+import CategoryDistributionChart from './CategoryDistributionChart'
+import SalesChannelChart from './SalesChannelChart'
 
 export const OverviewPage = () => {
   return (
@@ -26,7 +28,9 @@ export const OverviewPage = () => {
         {/* CHARTs */}
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
           <SalesOverviewChart />
+          <CategoryDistributionChart />
         </div>
+        <SalesChannelChart />
       </main>
     </div>
   )
