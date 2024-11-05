@@ -1,10 +1,10 @@
-import { Header } from '../common/Header'
+import { Header } from '../components/common/Header'
 import { motion } from 'framer-motion'
-import { StatCard } from '../common/StatCard'
+import { StatCard } from '../components/common/StatCard'
 import { DollarSignIcon, ShoppingBag, StickyNote, Users } from 'lucide-react'
-import { SalesOverviewChart } from './SalesOverviewChart'
-import CategoryDistributionChart from './CategoryDistributionChart'
-import SalesChannelChart from './SalesChannelChart'
+import { SalesOverviewChart } from '../components/overview/SalesOverviewChart'
+import CategoryDistributionChart from '../components/overview/CategoryDistributionChart'
+import SalesChannelChart from '../components/overview/SalesChannelChart'
 
 export const OverviewPage = () => {
   return (

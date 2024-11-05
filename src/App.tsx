@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import { Sidebar } from './components/sidebar'
-import { OverviewPage } from './components/overview'
+import { OverviewPage } from './pages/OverviewPage'
 import { User } from './components/user'
-import { ProductComponent } from './components/product'
+import { ProductComponent } from './pages/ProductPage'
 
 function App() {
   console.log(name)
