@@ -3,12 +3,12 @@ import { Product } from '../../interfaces/product.interfaces'
 import { Pencil, Search, Trash2 } from 'lucide-react'
 import { Table } from 'antd'
 import { Link } from 'react-router-dom'
-interface ProducTableProps {
+
+interface ProductTableProps {
   product: Product[]
 }
 
-export const ProductTable = ({ product }: ProducTableProps) => {
-  console.log('prod', product)
+export const ProductTable = ({ product }: ProductTableProps) => {
   const columns = [
     {
       title: 'ID',
@@ -50,10 +50,10 @@ export const ProductTable = ({ product }: ProducTableProps) => {
       render: (data: Product) => (
         <span className='flex items-center'>
           <Link key={data.id} to={`/productUpdate/${data.id}`}>
-            <Pencil />
+            <Pencil className='text-green-800' />
           </Link>
           <Link key={data.id} to={`/productDelete/${data.id}`}>
-            <Trash2 />
+            <Trash2 className='text-red-600 ml-2' />
           </Link>
         </span>
       )
@@ -63,7 +63,7 @@ export const ProductTable = ({ product }: ProducTableProps) => {
   return (
     <div>
       <motion.div
-        className='bg-white-800 bg-opacity-800 backdrop-blur-md shadow-[0_4px_10px_rgba(34,197,94,0.5)] rounded-xl p-6 border border-white-700'
+        className='bg-white-800 bg-opacity-80 backdrop-blur-md shadow-lg shadow-green-700 rounded-xl p-6 border border-green-700'
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
@@ -74,18 +74,18 @@ export const ProductTable = ({ product }: ProducTableProps) => {
             <input
               type='text'
               placeholder='Search products...'
-              className='bg-white-700 text-green-800 placeholder-white-400 rouded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='bg-white-700 text-green-800 placeholder-green-800 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500'
             />
-            <Search className='absolute left-3 top-2.5 text-green-800-400' size={18} />
+            <Search className='absolute left-3 top-2.5 text-green-800' size={18} />
           </div>
         </div>
 
         <div className='overflow-x-auto'>
           <Table
-            className='bg-white-800'
+            className='text-white'
             dataSource={product}
             columns={columns}
-            // onChange={}
+            // onChange={onChangeHandler} // Add onChange if needed
           />
         </div>
       </motion.div>

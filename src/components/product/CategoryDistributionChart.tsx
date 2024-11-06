@@ -19,7 +19,7 @@ const CategoryDistributionChart = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
     >
-      <h2 className='text-lg font-medium mb-4 text-green-800-100'>Sales Overview</h2>
+      <h2 className='text-lg font-medium mb-4 text-green-800'>Sales Overview</h2>
       <div className='h-80'>
         <ResponsiveContainer width={'100%'} height={'100%'}>
           <PieChart>
@@ -39,8 +39,9 @@ const CategoryDistributionChart = () => {
             </Pie>
             <Tooltip
               contentStyle={{
-                backgroundColor: 'rgba(31,41,55,0.8)',
-                borderColor: '#4B5563'
+                backgroundColor: 'rgb(255, 255, 255)',
+                borderColor: 'rgb(4, 120, 87)',
+                color: 'rgb(4, 120, 87)'
               }}
               itemStyle={{ color: '#ESE7EB' }}
             />
