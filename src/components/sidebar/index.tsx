@@ -22,26 +22,26 @@ export const Sidebar = () => {
       className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${isSideBarOpen ? 'w-64' : 'w-20'}`}
       animate={{ width: isSideBarOpen ? 256 : 80 }}
     >
-      <div className='h-full bg-green-800 p-4 flex flex-col border-r border-green-800'>
+      <div className="h-full bg-green-800 p-4 flex flex-col border-r border-green-800">
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsSideBarOpen(!isSideBarOpen)}
-          className='p-2 rounded-full hover:bg-green-200 transition-colors max-w-fit hover:bg-opacity-10'
+          className="p-2 rounded-full hover:bg-green-400 transition-colors max-w-fit"
         >
           <Menu size={24} />
         </motion.button>
 
-        <nav className='mt-8 flex-grow'>
+        <nav className="mt-8 flex-grow">
           {SIDEBAR_ITEMS.map((item) => (
             <Link key={item.path} to={item.path}>
-              <motion.div className='flex items-center p-4 text-sm font-medium rounded-lg hover:bg-white-400'>
+              <motion.div className="flex items-center p-4 text-sm font-medium rounded-lg hover:bg-green-400">
                 {/* Render the icon and text */}
                 <item.icon size={20} style={{ color: item.color, minWidth: '20px' }} />
                 <AnimatePresence>
                   {isSideBarOpen && (
                     <motion.span
-                      className='ml-4 whitespace-nowrap'
+                      className="ml-4 whitespace-nowrap"
                       initial={{ opacity: 0, width: 0 }}
                       animate={{ opacity: 1, width: 'auto' }}
                       exit={{ opacity: 0, width: 0 }}

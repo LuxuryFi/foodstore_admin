@@ -2,7 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import { Sidebar } from './components/sidebar'
 import { OverviewPage } from './pages/OverviewPage'
 import { User } from './components/user'
-import { ProductComponent } from './pages/ProductPage'
+import { ProductPages } from './pages/ProductPage'
+import { BannerPages } from './pages/BannerPage'
 
 function App() {
   console.log(name)
@@ -20,7 +21,9 @@ function App() {
         <Routes>
           <Route path='/' element={<OverviewPage />} />
           <Route path='/user' element={<User />} />
-          <Route path='/product' element={<ProductComponent />} />
+          <Route path='/product' element={<ProductPages />} />
+          <Route path='/banner' element={<BannerPages />} />
+
         </Routes>
       </div>
     </>

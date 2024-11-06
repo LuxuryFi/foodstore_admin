@@ -1,35 +1,35 @@
 import { useEffect, useState } from 'react'
-import productAPI from '../api/product'
-import { Product } from '../interfaces/product.interfaces'
+import { Banner } from '../interfaces/banner.interfaces'
 import { motion } from 'framer-motion'
 import { Users, StickyNote, ShoppingBag, DollarSignIcon } from 'lucide-react'
 import { Header } from '../components/common/Header'
 import { StatCard } from '../components/common/StatCard'
-import CategoryDistributionChart from '../components/product/CategoryDistributionChart'
-import { ProductTable } from '../components/product/ProductTable'
-import { SaleTrendChart } from '../components/product/SalesTrendChart'
+import CategoryDistributionChart from '../components/banner/CategoryDistributionChart'
+import { BannerTable } from '../components/banner/BannerTable'
+import { SaleTrendChart } from '../components/banner/SalesTrendChart'
+import bannerAPI from '../api/banner'
 
-export const ProductPages = () => {
-  const [product, setProduct] = useState<Product[]>([])
+export const BannerPages = () => {
+  const [banner, setBanner] = useState<Banner[]>([])
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchbanners = async () => {
       try {
-        const products = await productAPI.getProduct()
-        setProduct(products) // Set the product state with fetched data
+        const banners = await bannerAPI.getBanner()
+        setBanner(banners) // Set the banner state with fetched data
       } catch (error) {
-        console.error('Error fetching products:', error)
+        console.error('Error fetching banners:', error)
       }
     }
 
-    fetchProducts()
+    fetchbanners()
   }, []) // Empty dependency array to run the effect only once
 
-  console.log('produict', product)
+  console.log('produict', banner)
 
   return (
     <div className='flex-1 overflow-auto relative z-10'>
-      <Header title='Product' />
+      <Header title='Banner' />
 
       <main className='max-w-7x1 mx-auto py-6 px-4 lg:px-8 xl:px-20'>
         {/* STAT */}
@@ -39,16 +39,16 @@ export const ProductPages = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <StatCard name='New Product' icon={Users} value={13123} color='#6366F1'></StatCard>
-          <StatCard name='Total products' icon={StickyNote} value={13123} color='#6366F1'></StatCard>
+          <StatCard name='New Banner' icon={Users} value={13123} color='#6366F1'></StatCard>
+          <StatCard name='Total banners' icon={StickyNote} value={13123} color='#6366F1'></StatCard>
           <StatCard name='Total payment' icon={ShoppingBag} value={13123} color='#F59E0B'></StatCard>
           <StatCard name='Total revenue' icon={DollarSignIcon} value={13123} color='#6366F1'></StatCard>
         </motion.div>
 
-        <ProductTable product={product} />
+        <BannerTable banner={banner} />
 
         {/* CHARTs */}
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10'>
           <SaleTrendChart />
           <CategoryDistributionChart />
         </div>
