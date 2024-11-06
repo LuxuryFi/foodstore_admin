@@ -4,6 +4,7 @@ import { OverviewPage } from './pages/OverviewPage'
 import { User } from './components/user'
 import { ProductPages } from './pages/ProductPage'
 import { BannerPages } from './pages/BannerPage'
+import { DiscountPages } from './pages/DiscountPage'
 
 function App() {
   console.log(name)
@@ -23,7 +24,7 @@ function App() {
           <Route path='/user' element={<User />} />
           <Route path='/product' element={<ProductPages />} />
           <Route path='/banner' element={<BannerPages />} />
-
+          <Route path='/discount' element={<DiscountPages />} />
         </Routes>
       </div>
     </>
