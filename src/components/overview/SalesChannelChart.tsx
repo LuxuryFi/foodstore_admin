@@ -15,12 +15,12 @@ const COLORS = ['#6366F1', '#3266F1', '#De66F1', '#DA23F1', '#EE66F1']
 const SalesChannelChart = () => {
   return (
     <motion.div
-      className='bg-gray-800 bg-opacity-800 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
+      className='bg-white-800 bg-opacity-800 backdrop-blur-md shadow-lg rounded-xl p-6 border border-white-700'
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
     >
-      <h2 className='text-lg font-medium mb-4 text-gray-100'>Sales Overview</h2>
+      <h2 className='text-lg font-medium mb-4 text-white-100'>Sales Overview</h2>
       <div className='h-80'>
         <ResponsiveContainer width={'100%'} height={'100%'}>
           <BarChart data={SALLES_CHANNEL_DATA}>

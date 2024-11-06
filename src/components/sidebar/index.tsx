@@ -22,12 +22,12 @@ export const Sidebar = () => {
       className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${isSideBarOpen ? 'w-64' : 'w-20'}`}
       animate={{ width: isSideBarOpen ? 256 : 80 }}
     >
-      <div className='h-full bg-gray-800 bg-opacity-50 backdrop-blur-md p-4 flex flex-col border-r border-gray-700'>
+      <div className='h-full bg-green-800 p-4 flex flex-col border-r border-green-800'>
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsSideBarOpen(!isSideBarOpen)}
-          className='p-2 rounded-full hover:bg-gray-700 transition-colors max-w-fit'
+          className='p-2 rounded-full hover:bg-green-200 transition-colors max-w-fit hover:bg-opacity-10'
         >
           <Menu size={24} />
         </motion.button>
@@ -35,7 +35,7 @@ export const Sidebar = () => {
         <nav className='mt-8 flex-grow'>
           {SIDEBAR_ITEMS.map((item) => (
             <Link key={item.path} to={item.path}>
-              <motion.div className='flex items-center p-4 text-sm font-medium rounded-lg hover:bg-gray-400'>
+              <motion.div className='flex items-center p-4 text-sm font-medium rounded-lg hover:bg-white-400'>
                 {/* Render the icon and text */}
                 <item.icon size={20} style={{ color: item.color, minWidth: '20px' }} />
                 <AnimatePresence>

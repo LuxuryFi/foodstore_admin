@@ -64,26 +64,26 @@ export const ProductTable = ({ product }: ProducTableProps) => {
   return (
     <div>
       <motion.div
-        className='bg-gray-800 bg-opacity-800 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
+        className='bg-white-800 bg-opacity-800 backdrop-blur-md shadow-lg rounded-xl p-6 border border-white-700'
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
         <div className='flex justify-between items-center mb-6'>
-          <h2 className='text-lg font-medium mb-4 text-gray-100'>Product List</h2>
+          <h2 className='text-lg font-medium mb-4 text-white-100'>Product List</h2>
           <div className='relative'>
             <input
               type='text'
               placeholder='Search products...'
-              className='bg-gray-700 text-white placeholder-gray-400 rouded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='bg-white-700 text-white placeholder-white-400 rouded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
-            <Search className='absolute left-3 top-2.5 text-gray-400' size={18} />
+            <Search className='absolute left-3 top-2.5 text-white-400' size={18} />
           </div>
         </div>
 
         <div className='overflow-x-auto'>
           <Table
-            className='bg-gray-800'
+            className='bg-white-800'
             dataSource={product}
             columns={columns}
             // onChange={}
