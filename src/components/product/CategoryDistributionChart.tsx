@@ -2,11 +2,11 @@ import { motion } from 'framer-motion'
 import { PieChart, Cell, Pie, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 
 const categoryData = [
+  { name: 'Test', value: 7123 },
+  { name: 'Test', value: 2123 },
   { name: 'Test', value: 3123 },
-  { name: 'Test', value: 3123 },
-  { name: 'Test', value: 3123 },
-  { name: 'Test', value: 3123 },
-  { name: 'Test', value: 3123 }
+  { name: 'Test', value: 31123 },
+  { name: 'Test', value: 5123 }
 ]
 
 const COLORS = ['#6366F1', '#3266F1', '#De66F1', '#DA23F1', '#EE66F1']

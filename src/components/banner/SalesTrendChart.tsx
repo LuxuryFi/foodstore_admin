@@ -28,23 +28,23 @@ export const SaleTrendChart = () => {
       <div className='h-80'>
         <ResponsiveContainer width={'100%'} height={'100%'}>
           <LineChart data={overviewData}>
-            <CartesianGrid strokeDasharray='3 3' stroke='#4B5563' />
+            <CartesianGrid strokeDasharray='3 3' stroke='#047857' />
             <XAxis dataKey='name' />
-            <YAxis stroke='#9ca3af' />
+            <YAxis stroke='#047857' />
             <Tooltip
               contentStyle={{
                 backgroundColor: 'rgb(255, 255, 255)',
                 borderColor: 'rgb(4, 120, 87)',
                 color: 'rgb(4, 120, 87)'
               }}
-              itemStyle={{ color: '#ESE7EB' }}
+              itemStyle={{ color: '#047857' }}
             />
             <Line
               type='natural'
               dataKey='sales'
-              stroke='#6366F1'
+              stroke='#047857'
               strokeWidth={3}
-              dot={{ fill: '6366F1', strokeWidth: 2, r: 6 }}
+              dot={{ fill: '#047857', strokeWidth: 2, r: 6 }}
               activeDot={{ r: 8, strokeWidth: 2 }}
             />
           </LineChart>

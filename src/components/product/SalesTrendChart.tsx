@@ -2,16 +2,16 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { motion } from 'framer-motion'
 
 const overviewData = [
-  { name: 'Jan', sales: 5000 },
+  { name: 'Jan', sales: 8000 },
   { name: 'Feb', sales: 1000 },
-  { name: 'Mar', sales: 3000 },
+  { name: 'Mar', sales: 12000 },
   { name: 'Apr', sales: 1000 },
   { name: 'May', sales: 11000 },
   { name: 'June', sales: 1000 },
   { name: 'Jul', sales: 6000 },
   { name: 'Aug', sales: 7000 },
-  { name: 'Oct', sales: 5000 },
-  { name: 'Nov', sales: 2000 },
+  { name: 'Oct', sales: 25000 },
+  { name: 'Nov', sales: 8000 },
   { name: 'DEc', sales: 3000 }
 ]
 
@@ -28,23 +28,23 @@ export const SaleTrendChart = () => {
       <div className='h-80'>
         <ResponsiveContainer width={'100%'} height={'100%'}>
           <LineChart data={overviewData}>
-            <CartesianGrid strokeDasharray='3 3' stroke='#4B5563' />
+            <CartesianGrid strokeDasharray='3 3' stroke='#047857' />
             <XAxis dataKey='name' />
-            <YAxis stroke='#9ca3af' />
+            <YAxis stroke='#047857' />
             <Tooltip
               contentStyle={{
                 backgroundColor: 'rgb(255, 255, 255)',
                 borderColor: 'rgb(4, 120, 87)',
                 color: 'rgb(4, 120, 87)'
               }}
-              itemStyle={{ color: '#ESE7EB' }}
+              itemStyle={{ color: '#047857' }}
             />
             <Line
               type='natural'
               dataKey='sales'
-              stroke='#6366F1'
+              stroke='#047857'
               strokeWidth={3}
-              dot={{ fill: '6366F1', strokeWidth: 2, r: 6 }}
+              dot={{ fill: '#047857', strokeWidth: 2, r: 6 }}
               activeDot={{ r: 8, strokeWidth: 2 }}
             />
           </LineChart>
