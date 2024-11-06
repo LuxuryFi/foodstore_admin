@@ -3,12 +3,35 @@ import { Product } from '../../interfaces/product.interfaces'
 import { Pencil, Search, Trash2 } from 'lucide-react'
 import { Table } from 'antd'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 interface ProductTableProps {
   product: Product[]
 }
 
 export const ProductTable = ({ product }: ProductTableProps) => {
+  console.log('product', product)
+
+  const [searchProduct, setSearchProduct] = useState<Product[]>([]) // Initialize as empty array
+  const [searchTerm, setSearchTerm] = useState<string>('')
+
+  useEffect(() => {
+    // Update searchProduct whenever product changes
+    setSearchProduct(product)
+  }, [product])
+
+  console.log('searchProduct', searchProduct)
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value.toLowerCase()
+    setSearchTerm(term)
+
+    // Filter with fallback for product
+    const result = (product || []).filter((item) => item.product_name.toLowerCase().includes(term))
+    console.log('Filtered result:', result) // Log the filtered result
+    setSearchProduct(result) // Update searchProduct
+  }
+
   const columns = [
     {
       title: 'ID',
@@ -74,6 +97,7 @@ export const ProductTable = ({ product }: ProductTableProps) => {
             <input
               type='text'
               placeholder='Search products...'
+              onChange={handleSearch}
               className='bg-white-700 text-green-800 placeholder-green-800 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500'
             />
             <Search className='absolute left-3 top-2.5 text-green-800' size={18} />
@@ -81,12 +105,7 @@ export const ProductTable = ({ product }: ProductTableProps) => {
         </div>
 
         <div className='overflow-x-auto'>
-          <Table
-            className='text-white'
-            dataSource={product}
-            columns={columns}
-            // onChange={onChangeHandler} // Add onChange if needed
-          />
+          <Table className='text-white' dataSource={searchProduct} columns={columns} />
         </div>
       </motion.div>
     </div>
