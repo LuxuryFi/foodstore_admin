@@ -45,7 +45,7 @@ export const ProductComponent = () => {
           <StatCard name='Total revenue' icon={DollarSignIcon} value={13123} color='#6366F1'></StatCard>
         </motion.div>
 
-        <ProductTable data={product} />
+        <ProductTable product={product} />
 
         {/* CHARTs */}
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
