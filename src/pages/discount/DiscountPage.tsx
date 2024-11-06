@@ -1,35 +1,35 @@
 import { useEffect, useState } from 'react'
-import { Banner } from '../interfaces/banner.interfaces'
+import discountAPI from '../../api/discount'
+import { Discount } from '../../interfaces/discount.interfaces'
 import { motion } from 'framer-motion'
 import { Users, StickyNote, ShoppingBag, DollarSignIcon } from 'lucide-react'
-import { Header } from '../components/common/Header'
-import { StatCard } from '../components/common/StatCard'
-import CategoryDistributionChart from '../components/banner/CategoryDistributionChart'
-import { BannerTable } from '../components/banner/BannerTable'
-import { SaleTrendChart } from '../components/banner/SalesTrendChart'
-import bannerAPI from '../api/banner'
+import { Header } from '../../components/common/Header'
+import { StatCard } from '../../components/common/StatCard'
+import CategoryDistributionChart from '../../components/discount/CategoryDistributionChart'
+import { DiscountTable } from '../../components/discount/DiscountTable'
+import { SaleTrendChart } from '../../components/discount/SalesTrendChart'
 
-export const BannerPages = () => {
-  const [banner, setBanner] = useState<Banner[]>([])
+export const DiscountPages = () => {
+  const [discount, setDiscount] = useState<Discount[]>([])
 
   useEffect(() => {
-    const fetchbanners = async () => {
+    const fetchDiscounts = async () => {
       try {
-        const banners = await bannerAPI.getBanner()
-        setBanner(banners) // Set the banner state with fetched data
+        const discounts = await discountAPI.getDiscount()
+        setDiscount(discounts) // Set the discount state with fetched data
       } catch (error) {
-        console.error('Error fetching banners:', error)
+        console.error('Error fetching discounts:', error)
       }
     }
 
-    fetchbanners()
+    fetchDiscounts()
   }, []) // Empty dependency array to run the effect only once
 
-  console.log('produict', banner)
+  console.log('produict', discount)
 
   return (
     <div className='flex-1 overflow-auto relative z-10'>
-      <Header title='Banner' />
+      <Header title='Discount' />
 
       <main className='max-w-7x1 mx-auto py-6 px-4 lg:px-8 xl:px-20'>
         {/* STAT */}
@@ -39,13 +39,13 @@ export const BannerPages = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <StatCard name='New Banner' icon={Users} value={13123} color='#6366F1'></StatCard>
-          <StatCard name='Total banners' icon={StickyNote} value={13123} color='#6366F1'></StatCard>
+          <StatCard name='New Discount' icon={Users} value={13123} color='#6366F1'></StatCard>
+          <StatCard name='Total discounts' icon={StickyNote} value={13123} color='#6366F1'></StatCard>
           <StatCard name='Total payment' icon={ShoppingBag} value={13123} color='#F59E0B'></StatCard>
           <StatCard name='Total revenue' icon={DollarSignIcon} value={13123} color='#6366F1'></StatCard>
         </motion.div>
 
-        <BannerTable banner={banner} />
+        <DiscountTable discount={discount} />
 
         {/* CHARTs */}
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10'>

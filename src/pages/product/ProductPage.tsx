@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
-import productAPI from '../api/product'
-import { Product } from '../interfaces/product.interfaces'
+import productAPI from '../../api/product'
+import { Product } from '../../interfaces/product.interfaces'
 import { motion } from 'framer-motion'
 import { Users, StickyNote, ShoppingBag, DollarSignIcon } from 'lucide-react'
-import { Header } from '../components/common/Header'
-import { StatCard } from '../components/common/StatCard'
-import CategoryDistributionChart from '../components/product/CategoryDistributionChart'
-import { ProductTable } from '../components/product/ProductTable'
-import { SaleTrendChart } from '../components/product/SalesTrendChart'
+import { Header } from '../../components/common/Header'
+import { StatCard } from '../../components/common/StatCard'
+import CategoryDistributionChart from '../../components/product/CategoryDistributionChart'
+import { ProductTable } from '../../components/product/ProductTable'
+import { SaleTrendChart } from '../../components/product/SalesTrendChart'
+import { Button } from 'antd'
+import { Link } from 'react-router-dom'
 
 export const ProductPages = () => {
   const [product, setProduct] = useState<Product[]>([])
@@ -44,7 +46,19 @@ export const ProductPages = () => {
           <StatCard name='Total payment' icon={ShoppingBag} value={13123} color='#F59E0B'></StatCard>
           <StatCard name='Total revenue' icon={DollarSignIcon} value={13123} color='#6366F1'></StatCard>
         </motion.div>
-
+        <Button
+          type='primary'
+          style={{
+            backgroundColor: '#166534',
+            padding: '1.5rem',
+            marginBottom: '1rem',
+            fontWeight: 600
+          }}
+          name='Add New User'
+          value='Add New User'
+        >
+          <Link to='/addProduct'>Add New User</Link>
+        </Button>
         <ProductTable product={product} />
 
         {/* CHARTs */}

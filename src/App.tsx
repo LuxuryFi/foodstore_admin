@@ -2,9 +2,10 @@ import { Routes, Route } from 'react-router-dom'
 import { Sidebar } from './components/sidebar'
 import { OverviewPage } from './pages/OverviewPage'
 import { User } from './components/user'
-import { ProductPages } from './pages/ProductPage'
-import { BannerPages } from './pages/BannerPage'
-import { DiscountPages } from './pages/DiscountPage'
+import { ProductPages } from './pages/product/ProductPage'
+import { BannerPages } from './pages/banner/BannerPage'
+import { DiscountPages } from './pages/discount/DiscountPage'
+import { AddProductPages } from './pages/product/AddProductPage'
 
 function App() {
   console.log(name)
@@ -23,6 +24,7 @@ function App() {
           <Route path='/' element={<OverviewPage />} />
           <Route path='/user' element={<User />} />
           <Route path='/product' element={<ProductPages />} />
+          <Route path='/addProduct' element={<AddProductPages />} />
           <Route path='/banner' element={<BannerPages />} />
           <Route path='/discount' element={<DiscountPages />} />
         </Routes>
