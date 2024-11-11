@@ -6,6 +6,7 @@ import { ProductPages } from './pages/product/ProductPage'
 import { BannerPages } from './pages/banner/BannerPage'
 import { DiscountPages } from './pages/discount/DiscountPage'
 import { AddProductPages } from './pages/product/AddProductPage'
+import { UpdateProductPages } from './pages/product/updateProductPage'
 
 function App() {
   console.log(name)
@@ -25,6 +26,7 @@ function App() {
           <Route path='/user' element={<User />} />
           <Route path='/product' element={<ProductPages />} />
           <Route path='/addProduct' element={<AddProductPages />} />
+          <Route path='/productUpdate/:id' element={<UpdateProductPages />} />
           <Route path='/banner' element={<BannerPages />} />
           <Route path='/discount' element={<DiscountPages />} />
         </Routes>
