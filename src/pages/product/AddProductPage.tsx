@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import productAPI from '../../api/product'
 import { Product } from '../../interfaces/product.interfaces'
 import { motion } from 'framer-motion'
-import { Radio, Upload } from 'antd'
+import { Radio } from 'antd'
 import { Header } from '../../components/common/Header'
 import {
   Button,
@@ -11,16 +11,18 @@ import {
   ColorPicker,
   DatePicker,
   Form,
-  Input,
   InputNumber,
   Rate,
-  Select,
   Slider,
   Switch,
   TreeSelect,
 } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import { PlusIcon } from 'lucide-react'
+import Input from '../../components/common/Input'
+import Select from '../../components/common/Select'
+import Upload from '../../components/common/Upload'
+import ButtonPrimary from '../../components/common/Button'
 
 export const AddProductPages = () => {
   const [product, setProduct] = useState<Product[]>([])
@@ -52,22 +54,21 @@ export const AddProductPages = () => {
       <main className='max-w-7x1 mx-auto py-6 px-4 lg:px-8 xl:px-20'>
         {/* STAT */}
         <motion.div
-          className='grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8'
+          className='grid grid-cols-1 gap-5 mb-8'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
           <Form
             labelCol={{
-              span: 43
+              span: 44
             }}
             wrapperCol={{
-              span: 144
+              span: 136
             }}
-            layout='horizontal'
+            layout='vertical'
             style={{
-              maxWidth: 2200,
-              
+              maxWidth: 2200
             }}
           >
             <Form.Item label='Checkbox' name='disabled' valuePropName='checked'>
@@ -160,8 +161,14 @@ export const AddProductPages = () => {
             <Form.Item label='ColorPicker'>
               <ColorPicker />
             </Form.Item>
-            <Form.Item label='Rate'>
+            {/* <Form.Item label='Rate'>
               <Rate />
+            </Form.Item> */}
+            <Form.Item>
+              <ButtonPrimary type='primary'>Submit</ButtonPrimary>
+              <Button type='primary' color='primary'>
+                Clear
+              </Button>
             </Form.Item>
           </Form>
         </motion.div>
