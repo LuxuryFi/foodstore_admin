@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import productAPI from '../../api/product'
 import { Product } from '../../interfaces/product.interfaces'
 import { motion } from 'framer-motion'
@@ -25,7 +25,7 @@ export const UpdateProductPages = () => {
     form.resetFields()
   }
 
-  const onFinishFailed = (errorInfo: any) => {
+  const onFinishFailed = (errorInfo: unknown) => {
     console.error('Form submission failed:', errorInfo)
   }
 
@@ -93,6 +93,26 @@ export const UpdateProductPages = () => {
               <Switch />
             </Form.Item>
 
+            <Form.Item label='Upload' name='image' valuePropName='fileList' getValueFromEvent={normFile}>
+              <Upload listType='picture-card' name='image' action='http://localhost:4000/products/upload'>
+                <button
+                  style={{
+                    border: 0,
+                    background: 'none'
+                  }}
+                  type='button'
+                >
+                  <PlusIcon />
+                  <div
+                    style={{
+                      marginTop: 8
+                    }}
+                  >
+                    Upload
+                  </div>
+                </button>
+              </Upload>
+            </Form.Item>
             <Form.Item>
               <div className='flex justify-center'>
                 <div className='grid grid-cols-2 items-center gap-4'>

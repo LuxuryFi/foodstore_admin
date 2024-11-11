@@ -1,31 +1,54 @@
 import { useEffect, useState } from 'react'
 import productAPI from '../../api/product'
-import { Product } from '../../interfaces/product.interfaces'
+import { Product, ProductPayload } from '../../interfaces/product.interfaces'
 import { motion } from 'framer-motion'
 import { Header } from '../../components/common/Header'
 import { Button, ColorPicker, DatePicker, Form, Switch, Upload } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import Input from '../../components/common/Input'
 import ButtonPrimary from '../../components/common/Button'
-import moment from 'moment'
 import { PlusIcon } from 'lucide-react'
 
 export const AddProductPages = () => {
   const [product, setProduct] = useState<Product>({})
   const [form] = Form.useForm() // Get the form instance
 
-
-  const onFinish = (values: Product) => {
+  const onFinish = (values: ProductPayload) => {
     console.log('Form data submitted:', values)
+    const images = values.image
+    const filename = `${images[0].name}`;
+
     setProduct({
-      ...values
+      ...values,
+      image: filename
     })
   }
   const clearForm = () => {
     form.resetFields()
   }
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = (errorInfo: unknown) => {
     console.error('Form submission failed:', errorInfo)
+  }
+
+  const onChange = (info) => {
+    if (info.file.status === 'done') {
+      console.log('File uploaded successfully:', info.file.response);
+      // File uploaded successfully, the filename is available in info.file.response.filename
+      // Optionally, you can set the filename in the form or state
+      setFileList([
+        ...fileList,
+        { ...info.file, url: `http://localhost:4000/public/uploads/${info.file.response.filename}` }
+      ])
+    } else if (info.file.status === 'error') {
+      console.error('File upload error:', info.file.error);
+    }
+  };
+
+  const normFile = (e: unknown) => {
+    if (Array.isArray(e)) {
+      return e
+    }
+    return e?.fileList
   }
 
   useEffect(() => {
@@ -83,7 +106,7 @@ export const AddProductPages = () => {
             <Form.Item label='status' valuePropName='checked'>
               <Switch />
             </Form.Item>
-            <Form.Item label='Upload' valuePropName='fileList'>
+            <Form.Item label='Upload' name='image' valuePropName='fileList' getValueFromEvent={normFile}>
               <Upload listType='picture-card' name='image' action='http://localhost:4000/products/upload'>
                 <button
                   style={{
@@ -102,9 +125,6 @@ export const AddProductPages = () => {
                   </div>
                 </button>
               </Upload>
-            </Form.Item>
-            <Form.Item label='ColorPicker'>
-              <ColorPicker />
             </Form.Item>
             {/* <Form.Item label='Rate'>
               <Rate />

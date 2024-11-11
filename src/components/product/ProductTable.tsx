@@ -48,7 +48,14 @@ export const ProductTable = ({ product }: ProductTableProps) => {
       title: 'Image',
       dataIndex: 'image',
       key: 'image',
-      render: (image: string) => <img src={image} width='100px' alt='Product Image' />
+      render: (image: string) => (
+        <img
+          crossOrigin='anonymous'
+          src={`http://localhost:4000/public/uploads/${image}`}
+          width='100px'
+          alt='Product Image'
+        />
+      )
     },
     {
       title: 'Description',
