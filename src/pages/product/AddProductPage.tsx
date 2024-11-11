@@ -3,21 +3,22 @@ import productAPI from '../../api/product'
 import { Product } from '../../interfaces/product.interfaces'
 import { motion } from 'framer-motion'
 import { Header } from '../../components/common/Header'
-import { Button, ColorPicker, DatePicker, Form, Switch } from 'antd'
+import { Button, ColorPicker, DatePicker, Form, Switch, Upload } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import Input from '../../components/common/Input'
 import ButtonPrimary from '../../components/common/Button'
 import moment from 'moment'
+import { PlusIcon } from 'lucide-react'
 
 export const AddProductPages = () => {
   const [product, setProduct] = useState<Product>({})
   const [form] = Form.useForm() // Get the form instance
 
+
   const onFinish = (values: Product) => {
     console.log('Form data submitted:', values)
     setProduct({
-      ...values,
-      image: 'test'
+      ...values
     })
   }
   const clearForm = () => {
@@ -82,13 +83,8 @@ export const AddProductPages = () => {
             <Form.Item label='status' valuePropName='checked'>
               <Switch />
             </Form.Item>
-            {/* <Form.Item label='Upload' valuePropName='fileList' getValueFromEvent={normFile}>
-              <Upload
-                listType='picture-card'
-                name='image'
-                action='http://localhost:4000/products/upload'
-                withCredentials={true}
-              >
+            <Form.Item label='Upload' valuePropName='fileList'>
+              <Upload listType='picture-card' name='image' action='http://localhost:4000/products/upload'>
                 <button
                   style={{
                     border: 0,
@@ -106,7 +102,7 @@ export const AddProductPages = () => {
                   </div>
                 </button>
               </Upload>
-            </Form.Item> */}
+            </Form.Item>
             <Form.Item label='ColorPicker'>
               <ColorPicker />
             </Form.Item>

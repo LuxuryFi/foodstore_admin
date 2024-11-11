@@ -7,4 +7,5 @@ export interface Product {
   expired_date: Date
   description: string
   stock_quantity: string
+  image: string
 }

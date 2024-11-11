@@ -8,16 +8,17 @@ import TextArea from 'antd/es/input/TextArea'
 import Input from '../../components/common/Input'
 import ButtonPrimary from '../../components/common/Button'
 import { useParams } from 'react-router-dom'
+import dayjs from 'dayjs' // if you're using dayjs to handle dates
 
 export const UpdateProductPages = () => {
-  const [product, setProduct] = useState<Product | null>(null)
+  // const [product, setProduct] = useState<Product | null>(null)
   const [form] = Form.useForm()
   const { id } = useParams<{ id: string }>()
 
   const onFinish = (values: Product) => {
     console.log('Form data submitted:', values)
     // Call the update API here with the new values
-    productAPI.updateProduct(values)
+    productAPI.updateProduct(values, id)
   }
 
   const clearForm = () => {
@@ -33,9 +34,12 @@ export const UpdateProductPages = () => {
     const fetchProduct = async () => {
       try {
         const fetchedProduct = await productAPI.getOneProduct(id) // Fetch product by ID
-        setProduct(fetchedProduct)
+        // setProduct(fetchedProduct)
         // Set initial values in the form
-        form.setFieldsValue(fetchedProduct)
+        form.setFieldsValue({
+          ...fetchedProduct,
+          expired_date: fetchedProduct?.expired_date ? dayjs(fetchedProduct?.expired_date) : null // Handling expired_date formatting
+        })
       } catch (error) {
         console.error('Error fetching product:', error)
       }
@@ -63,17 +67,18 @@ export const UpdateProductPages = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete='off'
+            initialValues={{ remember: true }} // Optional for setting initial form values
           >
             <Form.Item name='product_name' label='Name'>
-              <Input value={product?.product_name} />
+              <Input />
             </Form.Item>
 
             <Form.Item name='price' label='Price'>
-              <Input value={product?.price} />
+              <Input />
             </Form.Item>
 
             <Form.Item name='stock_quantity' label='Stock'>
-              <Input value={product?.stock_quantity} />
+              <Input />
             </Form.Item>
 
             <Form.Item name='expired_date' label='Expired Time'>
@@ -81,7 +86,7 @@ export const UpdateProductPages = () => {
             </Form.Item>
 
             <Form.Item name='description' label='Description'>
-              <TextArea rows={4} value={product?.description} />
+              <TextArea rows={4} />
             </Form.Item>
 
             <Form.Item label='Status' valuePropName='checked'>

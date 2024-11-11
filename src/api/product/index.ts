@@ -6,9 +6,12 @@ const productAPI = {
     const url = '/products/product'
     return axiosClient.post(url, product)
   },
-  updateProduct(product: Product) {
-    const url = '/products/product'
-    return axiosClient.put(url, product)
+  updateProduct(product: Product, id?: string) {
+    if (id) {
+      const url = `/products/product/${id}`
+      return axiosClient.put(url, { ...product, image: 'test' })
+    }
+    return null
   },
   async getProduct(): Promise<Product[]> {
     const url = '/products/product'
