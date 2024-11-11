@@ -13,6 +13,13 @@ const productAPI = {
     }
     return null
   },
+  deleteProduct(id?: string) {
+    if (id) {
+      const url = `/products/product/${id}`
+      return axiosClient.delete(url)
+    }
+    return null
+  },
   async getProduct(): Promise<Product[]> {
     const url = '/products/product'
     try {

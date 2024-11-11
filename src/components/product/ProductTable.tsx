@@ -4,6 +4,7 @@ import { Pencil, Search, Trash2 } from 'lucide-react'
 import { Table } from 'antd'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import productAPI from '../../api/product'
 
 interface ProductTableProps {
   product: Product[]
@@ -21,6 +22,11 @@ export const ProductTable = ({ product }: ProductTableProps) => {
   }, [product])
 
   console.log('searchProduct', searchProduct)
+
+  const deleteProduct = async (id: string) => {
+    await productAPI.deleteProduct(id);
+    window.location.reload();
+  }
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value.toLowerCase()
@@ -82,9 +88,7 @@ export const ProductTable = ({ product }: ProductTableProps) => {
           <Link key={data.id} to={`/productUpdate/${data.id}`}>
             <Pencil className='text-green-800' />
           </Link>
-          <Link key={data.id} to={`/productDelete/${data.id}`}>
-            <Trash2 className='text-red-600 ml-2' />
-          </Link>
+          <Trash2 className='text-red-600 ml-2' onClick={() => deleteProduct(data.id.toString())}/>
         </span>
       )
     }

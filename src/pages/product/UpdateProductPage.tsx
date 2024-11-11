@@ -3,12 +3,13 @@ import productAPI from '../../api/product'
 import { Product } from '../../interfaces/product.interfaces'
 import { motion } from 'framer-motion'
 import { Header } from '../../components/common/Header'
-import { Button, DatePicker, Form, Switch } from 'antd'
+import { Button, DatePicker, Form, Switch, Upload } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import Input from '../../components/common/Input'
 import ButtonPrimary from '../../components/common/Button'
 import { useParams } from 'react-router-dom'
 import dayjs from 'dayjs' // if you're using dayjs to handle dates
+import { PlusIcon } from 'lucide-react'
 
 export const UpdateProductPages = () => {
   // const [product, setProduct] = useState<Product | null>(null)
@@ -19,6 +20,13 @@ export const UpdateProductPages = () => {
     console.log('Form data submitted:', values)
     // Call the update API here with the new values
     productAPI.updateProduct(values, id)
+  }
+
+  const normFile = (e: any) => {
+    if (Array.isArray(e)) {
+      return e
+    }
+    return e?.fileList
   }
 
   const clearForm = () => {

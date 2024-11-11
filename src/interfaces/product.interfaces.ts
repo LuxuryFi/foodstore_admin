@@ -21,5 +21,13 @@ export interface ProductPayload {
 }
 
 export interface Image {
-  name: string
+  response: Response
+}
+
+export interface Response {
+  file: File
+}
+
+export interface File {
+  filename: string
 }
