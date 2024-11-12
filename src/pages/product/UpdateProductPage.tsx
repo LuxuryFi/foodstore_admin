@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import productAPI from '../../api/product'
 import { Product } from '../../interfaces/product.interfaces'
 import { motion } from 'framer-motion'
@@ -12,22 +12,24 @@ import dayjs from 'dayjs' // if you're using dayjs to handle dates
 import { PlusIcon } from 'lucide-react'
 
 export const UpdateProductPages = () => {
-  // const [product, setProduct] = useState<Product | null>(null)
+  const [product, setProduct] = useState<Product>({})
   const [form] = Form.useForm()
   const { id } = useParams<{ id: string }>()
 
   const onFinish = (values: Product) => {
-    console.log('Form data submitted:', values)
+    console.log('Form data submitted:', product)
     // Call the update API here with the new values
-    productAPI.updateProduct(values, id)
+    productAPI.updateProduct({...values, image: product.image }, id)
+    clearForm();
   }
 
   const normFile = (e: any) => {
+    console.log('Upload event:', e); // Debug line to see the structure of e
     if (Array.isArray(e)) {
-      return e
+      return e;
     }
-    return e?.fileList
-  }
+    return e?.fileList || []; // Ensure it returns an array even if fileList is undefined
+  };
 
   const clearForm = () => {
     form.resetFields()
@@ -48,6 +50,8 @@ export const UpdateProductPages = () => {
           ...fetchedProduct,
           expired_date: fetchedProduct?.expired_date ? dayjs(fetchedProduct?.expired_date) : null // Handling expired_date formatting
         })
+
+        setProduct(fetchedProduct)
       } catch (error) {
         console.error('Error fetching product:', error)
       }
@@ -101,8 +105,8 @@ export const UpdateProductPages = () => {
               <Switch />
             </Form.Item>
 
-            <Form.Item label='Upload' name='image' valuePropName='fileList' getValueFromEvent={normFile}>
-              <Upload listType='picture-card' name='image' action='http://localhost:4000/products/upload'>
+            {/* <Form.Item label='Upload' name='image' valuePropName='fileList' getValueFromEvent={normFile}>
+              <Upload listType='picture-card' name='image' action='http://localhost:4000/products/upload' beforeUpload={() => false}>
                 <button
                   style={{
                     border: 0,
@@ -120,7 +124,7 @@ export const UpdateProductPages = () => {
                   </div>
                 </button>
               </Upload>
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item>
               <div className='flex justify-center'>
                 <div className='grid grid-cols-2 items-center gap-4'>

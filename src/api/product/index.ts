@@ -9,7 +9,8 @@ const productAPI = {
   updateProduct(product: Product, id?: string) {
     if (id) {
       const url = `/products/product/${id}`
-      return axiosClient.put(url, { ...product, image: 'test' })
+      return axiosClient.put(url, { ...product
+      })
     }
     return null
   },

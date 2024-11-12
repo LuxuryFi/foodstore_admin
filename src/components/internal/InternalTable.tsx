@@ -1,30 +1,30 @@
 import { motion } from 'framer-motion'
-import { Product } from '../../interfaces/product.interfaces'
+import { Internal } from '../../interfaces/internal.interfaces'
 import { Pencil, Search, Trash2 } from 'lucide-react'
 import { Modal, Table } from 'antd'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import productAPI from '../../api/product'
+import internalAPI from '../../api/internal'
 
-interface ProductTableProps {
-  product: Product[]
+interface InternalTableProps {
+  internal: Internal[]
 }
 
-export const ProductTable = ({ product }: ProductTableProps) => {
-  console.log('product', product)
+export const InternalTable = ({ internal }: InternalTableProps) => {
+  console.log('internal', internal)
 
-  const [searchProduct, setSearchProduct] = useState<Product[]>([]) // Initialize as empty array
+  const [searchInternal, setSearchInternal] = useState<Internal[]>([]) // Initialize as empty array
   const [searchTerm, setSearchTerm] = useState<string>('')
 
   useEffect(() => {
-    // Update searchProduct whenever product changes
-    setSearchProduct(product)
-  }, [product])
+    // Update searchInternal whenever internal changes
+    setSearchInternal(internal)
+  }, [internal])
 
-  console.log('searchProduct', searchProduct)
+  console.log('searchInternal', searchInternal)
 
-  const deleteProduct = async (id: string) => {
-    await productAPI.deleteProduct(id);
+  const deleteInternal = async (id: string) => {
+    await internalAPI.deleteInternal(id);
     window.location.reload();
   }
 
@@ -32,10 +32,10 @@ export const ProductTable = ({ product }: ProductTableProps) => {
     const term = e.target.value.toLowerCase()
     setSearchTerm(term)
 
-    // Filter with fallback for product
-    const result = (product || []).filter((item) => item.product_name.toLowerCase().includes(term))
+    // Filter with fallback for internal
+    const result = (internal || []).filter((item) => item.internal_name.toLowerCase().includes(term))
     console.log('Filtered result:', result) // Log the filtered result
-    setSearchProduct(result) // Update searchProduct
+    setSearchInternal(result) // Update searchInternal
   }
 
   const columns = [
@@ -46,46 +46,49 @@ export const ProductTable = ({ product }: ProductTableProps) => {
     },
     {
       title: 'Name',
-      dataIndex: 'product_name',
-      key: 'product_name',
+      dataIndex: 'name',
+      key: 'name',
       sorter: true
     },
     {
       title: 'Image',
-      dataIndex: 'image',
-      key: 'image',
-      render: (image: string) => (
+      dataIndex: 'url',
+      key: 'url',
+      render: (url: string) => (
         <img
           crossOrigin='anonymous'
-          src={`http://localhost:4000/public/uploads/${image}`}
+          src={`http://localhost:4000/public/uploads/${url}`}
           width='100px'
-          alt='Product Image'
+          alt='Internal Image'
         />
       )
     },
     {
-      title: 'Description',
-      dataIndex: 'description',
+      title: 'Address',
+      dataIndex: 'address',
       key: 'description'
     },
     {
-      title: 'Price',
-      dataIndex: 'price',
-      key: 'price',
+      title: 'Phone',
+      dataIndex: 'phone',
+      key: 'phone',
       sorter: true
     },
     {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount'
+      title: 'Gender',
+      dataIndex: 'gender',
+      key: 'gender',
+      render: (gender: boolean) => (
+        gender ? 'Male' : 'Female'
+      )
     },
     {
       title: 'Action',
       dataIndex: '',
       key: 'x',
-      render: (data: Product) => (
+      render: (data: Internal) => (
         <span className='flex items-center'>
-          <Link key={data.id} to={`/productUpdate/${data.id}`}>
+          <Link key={data.id} to={`/internalUpdate/${data.id}`}>
             <Pencil className='text-green-800' />
           </Link>
           <Trash2 className='text-red-600 ml-2'  onClick={() => {
@@ -93,7 +96,7 @@ export const ProductTable = ({ product }: ProductTableProps) => {
               title: 'Confirm',
               content: 'Are you confirm to delete this?',
               onOk: () => {
-                deleteProduct(data.id.toString()); // Handle the delete logic
+                deleteInternal(data.id.toString()); // Handle the delete logic
               },
               footer: (_, { OkBtn, CancelBtn }) => (
                 <>
@@ -117,11 +120,11 @@ export const ProductTable = ({ product }: ProductTableProps) => {
         transition={{ delay: 0.3 }}
       >
         <div className='flex justify-between items-center mb-6'>
-          <h2 className='text-lg font-medium mb-4 text-green-800'>Product List</h2>
+          <h2 className='text-lg font-medium mb-4 text-green-800'>Internal List</h2>
           <div className='relative'>
             <input
               type='text'
-              placeholder='Search products...'
+              placeholder='Search internals...'
               onChange={handleSearch}
               className='bg-white-700 text-green-800 placeholder-green-800 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500'
             />
@@ -130,7 +133,7 @@ export const ProductTable = ({ product }: ProductTableProps) => {
         </div>
 
         <div className='overflow-x-auto'>
-          <Table className='text-white' dataSource={searchProduct} columns={columns} />
+          <Table className='text-white' dataSource={searchInternal} columns={columns} />
         </div>
       </motion.div>
     </div>

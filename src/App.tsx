@@ -1,12 +1,17 @@
 import { Routes, Route } from 'react-router-dom'
 import { Sidebar } from './components/sidebar'
 import { OverviewPage } from './pages/OverviewPage'
-import { User } from './components/user'
 import { ProductPages } from './pages/product/ProductPage'
 import { BannerPages } from './pages/banner/BannerPage'
 import { DiscountPages } from './pages/discount/DiscountPage'
 import { AddProductPages } from './pages/product/AddProductPage'
-import { UpdateProductPages } from './pages/product/updateProductPage'
+import { UpdateProductPages } from './pages/product/UpdateProductPage'
+import { InternalPages } from './pages/internal/InternalPage'
+import { AddInternalPages } from './pages/internal/AddInternalPage'
+import { UpdateInternalPages } from './pages/internal/UpdateInternalPage'
+import { UserPages } from './pages/user/UserPage'
+import { AddUserPages } from './pages/user/AddUserPage'
+import { UpdateUserPages } from './pages/user/UpdateUserPage'
 
 function App() {
   console.log(name)
@@ -23,10 +28,19 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path='/' element={<OverviewPage />} />
-          <Route path='/user' element={<User />} />
+
           <Route path='/product' element={<ProductPages />} />
           <Route path='/addProduct' element={<AddProductPages />} />
           <Route path='/productUpdate/:id' element={<UpdateProductPages />} />
+
+          <Route path='/internal' element={<InternalPages />} />
+          <Route path='/addInternal' element={<AddInternalPages />} />
+          <Route path='/internalUpdate/:id' element={<UpdateInternalPages />} />
+
+          <Route path='/user' element={<UserPages />} />
+          <Route path='/addUser' element={<AddUserPages />} />
+          <Route path='/userUpdate/:id' element={<UpdateUserPages />} />
+
           <Route path='/banner' element={<BannerPages />} />
           <Route path='/discount' element={<DiscountPages />} />
         </Routes>

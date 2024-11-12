@@ -1,23 +1,23 @@
-export interface Product {
-  id: number
-  image: string
-  product_name: string
-  amount: number
-  price: string
-  expired_date: Date
-  description: string
-  stock_quantity: string
+export interface User {
+  id?: number
+  name?: string
+  amount?: number
+  price?: string
+  expired_date?: Date
+  description?: string
+  stock_quantity?: string
+  url?: string
 }
 
-export interface ProductPayload {
+export interface UserPayload {
   id: number
-  product_name: string
+  name: string
   amount: number
   price: string
   expired_date: Date
   description: string
   stock_quantity: string
-  image: Image[]
+  url: Image[]
 }
 
 export interface Image {

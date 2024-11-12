@@ -1,23 +1,23 @@
-export interface Product {
-  id: number
-  image: string
-  product_name: string
-  amount: number
-  price: string
-  expired_date: Date
-  description: string
-  stock_quantity: string
+export interface Internal {
+  id?: number
+  internal_name?: string
+  amount?: number
+  price?: string
+  expired_date?: Date
+  description?: string
+  stock_quantity?: string
+  url?: string
 }
 
-export interface ProductPayload {
+export interface InternalPayload {
   id: number
-  product_name: string
+  internal_name: string
   amount: number
   price: string
   expired_date: Date
   description: string
   stock_quantity: string
-  image: Image[]
+  url: Image[]
 }
 
 export interface Image {

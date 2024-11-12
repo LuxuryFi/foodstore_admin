@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react'
-import productAPI from '../../api/product'
-import { Product, ProductPayload } from '../../interfaces/product.interfaces'
+import userAPI from '../../api/user'
+import { User, UserPayload } from '../../interfaces/user.interfaces'
 import { motion } from 'framer-motion'
 import { Header } from '../../components/common/Header'
-import { Button, DatePicker, Form, Modal, Switch, Upload } from 'antd'
-import TextArea from 'antd/es/input/TextArea'
+import { Button, DatePicker, Form, Modal, Radio, Select, Switch, Upload } from 'antd'
 import Input from '../../components/common/Input'
 import ButtonPrimary from '../../components/common/Button'
 import { PlusIcon } from 'lucide-react'
 import { notification } from 'antd';
 
-export const AddProductPages = () => {
-  const [product, setProduct] = useState<Product>({})
+export const AddUserPages = () => {
+  const [user, setUser] = useState<User>({})
   const [fileList, setFileList] = useState<any[]>([]) // To track the uploaded file(s)
   const [form] = Form.useForm() // Get the form instance
   const [isModalVisible, setModalVisible] = useState(false);
-  const onFinish = (values: ProductPayload) => {
-    console.log('Form data submitted:', product)
-
-    const fileList = values.image
+  const onFinish = (values: UserPayload) => {
+    console.log('values', values);
+    const fileList = values.url
     if (fileList && fileList.length > 0) {
       const filename = fileList[0].response.file.filename // Assuming you want to take the name of the uploaded file
-      setProduct({
+      console.log('image', filename);
+      setUser({
         ...values,
-        image: filename // Update product with the image filename
+        url: filename // Update user with the image filename
       })
     }
   }
@@ -66,8 +65,8 @@ export const AddProductPages = () => {
   }
 
   useEffect(() => {
-    if (Object.keys(product).length > 0) {
-      productAPI.addProduct(product) // Add product API call
+    if (Object.keys(user).length > 0) {
+      userAPI.addUser(user) // Add user API call
       clearForm() // Clear form after submitting
 
       setTimeout(() => {
@@ -80,11 +79,11 @@ export const AddProductPages = () => {
       }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product])
+  }, [user])
 
   return (
     <div className='flex-1 overflow-auto relative z-10'>
-      <Header title='Add Product' />
+      <Header title='Add User' />
 
       <main className='max-w-7x1 mx-auto py-6 px-4 lg:px-8 xl:px-20'>
         <motion.div
@@ -110,29 +109,45 @@ export const AddProductPages = () => {
             autoComplete='off'
             initialValues={{ remember: true }}
           >
-            <Form.Item name='product_name' label='Name' required={true}>
+            <Form.Item name='name' label='Name' required={true}>
               <Input required={true}/>
             </Form.Item>
-            <Form.Item name='price' label='Price'  required={true}>
+            <Form.Item name='type' label='Type' required={true}>
               <Input required={true}/>
             </Form.Item>
-            <Form.Item name='stock_quantity' label='Stock'  required={true}>
+            <Form.Item name='address' label='Address' required={true}>
               <Input required={true}/>
             </Form.Item>
-            <Form.Item name='expired_date' label='Expired Time'  required={true}>
-              <DatePicker />
+            <Form.Item name='phone' label='Phone' required={true}>
+              <Input required={true}/>
             </Form.Item>
-            <Form.Item name='description' label='Description' required={true}>
-              <TextArea rows={4} required={true}/>
+            <Form.Item name='password' label='Password' required={true}>
+              <Input required={true}/>
             </Form.Item>
-            <Form.Item label='Status' valuePropName='checked'  required={true}>
-              <Switch />
+            <Form.Item
+              label="Role"
+              name="role"
+              rules={[{ required: true, message: 'Please select your role!' }]}
+            >
+              <Select>
+                <Select.Option value={1}>Admin</Select.Option>
+                <Select.Option value={0}>Seller</Select.Option>
+              </Select>
             </Form.Item>
-            <Form.Item label='Upload' name='image' valuePropName='fileList' getValueFromEvent={normFile}>
+            <Form.Item name='email' label='Email' required={true}>
+              <Input required={true}/>
+            </Form.Item>
+            <Form.Item label='Radio' name='gender'>
+              <Radio.Group>
+                <Radio value={false}> Male </Radio>
+                <Radio value={true}> Female </Radio>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item label='Upload' name='url' valuePropName='fileList' getValueFromEvent={normFile}>
               <Upload
                 listType='picture-card'
-                name='image'
-                action='http://localhost:4000/products/upload'
+                name='url'
+                action='http://localhost:4000/users/upload'
                 onChange={onChange} // Handle file upload change
               >
                 <button
