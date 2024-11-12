@@ -3,7 +3,7 @@ import axiosClient from '../axios.config'
 
 const authAPI = {
   async login(credentials: AuthInterfaces) {
-    const url = '/internal/login'
+    const url = '/auth/internal_login'
     const response = await axiosClient.post(url, credentials)
     return response.data
   }

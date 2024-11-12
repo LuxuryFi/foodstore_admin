@@ -3,7 +3,7 @@
   import { Internal } from '../../interfaces/internal.interfaces'
   import { motion } from 'framer-motion'
   import { Header } from '../../components/common/Header'
-  import { Button, Form, Modal, Radio, Select } from 'antd'
+  import { Button, Form, Modal, Radio, Select, Switch } from 'antd'
   import Input from '../../components/common/Input'
   import ButtonPrimary from '../../components/common/Button'
   import { useParams } from 'react-router-dom'
@@ -115,6 +115,9 @@
               <Form.Item name='email' label='Email' required={true}>
                 <Input disabled/>
               </Form.Item>
+              <Form.Item label='Status' valuePropName='checked' name='status'>
+              <Switch />
+            </Form.Item>
               <Form.Item label='Radio' name='gender' >
                 <Radio.Group value={form.getFieldValue('gender')}>
                   <Radio value={false}> Male </Radio>

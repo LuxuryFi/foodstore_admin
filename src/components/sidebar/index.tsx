@@ -1,7 +1,8 @@
-import { BarChart, CoinsIcon, Drumstick, Menu, ShoppingBag, User2Icon, UserSquare2 } from 'lucide-react'
+import { BarChart, CoinsIcon, Drumstick, LogOut, Menu, ShoppingBag, User2Icon, UserSquare2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
+import { isLogin } from '../../helpers/isLogin'
 
 const SIDEBAR_ITEMS = [
   { name: 'Homepage', icon: BarChart, color: '#ffffff', path: '/' },
@@ -15,7 +16,16 @@ const SIDEBAR_ITEMS = [
 ]
 
 export const Sidebar = () => {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(true)
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+
+  const logout = () => {
+    const logged = isLogin();
+
+    if (logged) {
+      console.log('test', window.localStorage.getItem('accessToken'))
+      window.localStorage.removeItem('accessToken');
+    }
+  }
 
   return (
     <motion.div
@@ -38,6 +48,7 @@ export const Sidebar = () => {
               <motion.div className="flex items-center p-4 text-sm font-medium rounded-lg hover:bg-green-400">
                 {/* Render the icon and text */}
                 <item.icon size={20} style={{ color: item.color, minWidth: '20px' }} />
+
                 <AnimatePresence>
                   {isSideBarOpen && (
                     <motion.span
@@ -55,6 +66,25 @@ export const Sidebar = () => {
               </motion.div>
             </Link>
           ))}
+              <motion.div className="flex items-center p-4 text-sm font-medium rounded-lg hover:bg-green-400" onClick={logout}>
+                {/* Render the icon and text */}
+                {/* <item.icon size={20} style={{ color: item.color, minWidth: '20px' }} /> */}
+                <LogOut/>
+                <AnimatePresence onClick={logout}>
+                  {isSideBarOpen && (
+                    <motion.span
+                      className="ml-4 whitespace-nowrap"
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: 'auto' }}
+                      exit={{ opacity: 0, width: 0 }}
+                      transition={{ duration: 0.2, delay: 0.3 }}
+                    >
+                      Logout
+                    </motion.span>
+                  )}
+                  {/* Show text only when sidebar is open */}
+                </AnimatePresence>
+              </motion.div>
         </nav>
       </div>
     </motion.div>

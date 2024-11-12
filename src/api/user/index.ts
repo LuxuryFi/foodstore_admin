@@ -24,7 +24,7 @@ const userAPI = {
     const url = '/users'
     try {
       const response = await axiosClient.get(url) // Or post if needed
-      return response.data // Assuming the response data is an array of users
+      return response.data.data // Assuming the response data is an array of users
     } catch (error) {
       console.error('Error fetching users:', error)
       return [] // Return an empty array in case of an error
@@ -34,7 +34,7 @@ const userAPI = {
     const url = `/users/${id}`
     try {
       const response = await axiosClient.get(url) // Or post if needed
-      return response.data // Assuming the response data is an array of users
+      return response.data.data // Assuming the response data is an array of users
     } catch (error) {
       console.error('Error fetching users:', error)
       return null // Return an empty array in case of an error

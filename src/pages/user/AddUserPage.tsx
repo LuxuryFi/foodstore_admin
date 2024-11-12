@@ -124,16 +124,6 @@ export const AddUserPages = () => {
             <Form.Item name='password' label='Password' required={true}>
               <Input required={true}/>
             </Form.Item>
-            <Form.Item
-              label="Role"
-              name="role"
-              rules={[{ required: true, message: 'Please select your role!' }]}
-            >
-              <Select>
-                <Select.Option value={1}>Admin</Select.Option>
-                <Select.Option value={0}>Seller</Select.Option>
-              </Select>
-            </Form.Item>
             <Form.Item name='email' label='Email' required={true}>
               <Input required={true}/>
             </Form.Item>

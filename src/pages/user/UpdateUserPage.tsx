@@ -3,7 +3,7 @@
   import { User } from '../../interfaces/user.interfaces'
   import { motion } from 'framer-motion'
   import { Header } from '../../components/common/Header'
-  import { Button, Form, Modal, Radio, Select } from 'antd'
+  import { Button, Form, Modal, Radio, Select, Switch } from 'antd'
   import Input from '../../components/common/Input'
   import ButtonPrimary from '../../components/common/Button'
   import { useParams } from 'react-router-dom'
@@ -98,16 +98,6 @@
               <Form.Item name='phone' label='Phone' required={true}>
                 <Input required={true}/>
               </Form.Item>
-              <Form.Item
-                label="Role"
-                name="role"
-                rules={[{ required: true, message: 'Please select your role!' }]}
-              >
-                <Select>
-                  <Select.Option value={1}>Admin</Select.Option>
-                  <Select.Option value={0}>Seller</Select.Option>
-                </Select>
-              </Form.Item>
               <Form.Item name='email' label='Email' required={true}>
                 <Input disabled/>
               </Form.Item>
@@ -117,6 +107,9 @@
                   <Radio value={true}> Female </Radio>
                 </Radio.Group>
               </Form.Item>
+              <Form.Item label='Status' valuePropName='checked'>
+              <Switch />
+            </Form.Item>
               <Form.Item>
                 <div className='flex justify-center'>
                   <div className='grid grid-cols-2 items-center gap-4'>
