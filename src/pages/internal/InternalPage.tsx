@@ -54,10 +54,10 @@ export const InternalPages = () => {
             marginBottom: '1rem',
             fontWeight: 600
           }}
-          name='Add New User'
+          name='Add New Internal User'
           value='Add New User'
         >
-          <Link to='/addInternal'>Add New User</Link>
+          <Link to='/addInternal'>Add New Internal User</Link>
         </Button>
         <InternalTable internal={internal} />
 

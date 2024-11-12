@@ -31,11 +31,11 @@ function App() {
 
 function PrivateRoute({ children }) {
   // let location = useLocation();
-  return true ? children : <Navigate to="/login" replace />;
+  return isLogin() ? children : <Navigate to="/login" replace />;
 }
 
 function PublicRoute({ children }) {
-  return isLogin() ? children : <Navigate to="/dashboard" replace />;
+  return !isLogin() ? children : <Navigate to="/dashboard" replace />;
 };
 
 export default App

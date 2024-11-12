@@ -1,17 +1,18 @@
 import { Button, Form, Input, Modal } from "antd"
 import ButtonPrimary from '../../components/common/Button'
 import authAPI from "../../api/auth"
-import { Navigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 
 export const LoginPage = () => {
   const [form] = Form.useForm() // Get the form instance
+  const navigate = useNavigate();
 
   const onFinish = async (values) => {
     const result = await authAPI.login(values);
     console.log('result', result);
 
     window.localStorage.setItem('accessToken', result.accessToken);
-    <Navigate to='/' replace/>
+    navigate('/dashboard')
   }
 
   return (

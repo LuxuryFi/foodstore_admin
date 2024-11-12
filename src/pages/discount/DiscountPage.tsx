@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import discountAPI from '../../api/discount'
 import { Discount } from '../../interfaces/discount.interfaces'
 import { motion } from 'framer-motion'
-import { Users, StickyNote, ShoppingBag, DollarSignIcon } from 'lucide-react'
+import { Users, StickyNote, ShoppingBag, DollarSignIcon, Link } from 'lucide-react'
 import { Header } from '../../components/common/Header'
 import { StatCard } from '../../components/common/StatCard'
-import CategoryDistributionChart from '../../components/discount/CategoryDistributionChart'
+import DiscountDistributionChart from '../../components/discount/CategoryDistributionChart'
 import { DiscountTable } from '../../components/discount/DiscountTable'
 import { SaleTrendChart } from '../../components/discount/SalesTrendChart'
+import { Button } from 'antd'
 
 export const DiscountPages = () => {
   const [discount, setDiscount] = useState<Discount[]>([])
@@ -44,13 +45,25 @@ export const DiscountPages = () => {
           <StatCard name='Total payment' icon={ShoppingBag} value={13123} color='#F59E0B'></StatCard>
           <StatCard name='Total revenue' icon={DollarSignIcon} value={13123} color='#6366F1'></StatCard>
         </motion.div>
-
+        <Button
+          type='primary'
+          style={{
+            backgroundColor: '#166534',
+            padding: '1.5rem',
+            marginBottom: '1rem',
+            fontWeight: 600
+          }}
+          name='Add New Discount'
+          value='Add New Discount'
+        >
+          <Link to='/addDiscount'>Add New Discount</Link>
+        </Button>
         <DiscountTable discount={discount} />
 
         {/* CHARTs */}
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10'>
           <SaleTrendChart />
-          <CategoryDistributionChart />
+          <DiscountDistributionChart />
         </div>
       </main>
     </div>

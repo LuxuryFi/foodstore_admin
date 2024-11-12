@@ -31,7 +31,7 @@ const productAPI = {
       return [] // Return an empty array in case of an error
     }
   },
-  async getOneProduct(id: unknown): Promise<Product | null> {
+  async getOneProduct(id: unknown): Promise<Product> {
     const url = `/products/product/${id}`
     try {
       const response = await axiosClient.get(url) // Or post if needed

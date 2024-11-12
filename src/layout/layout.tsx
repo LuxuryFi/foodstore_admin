@@ -12,6 +12,9 @@ import { UpdateProductPages } from "../pages/product/UpdateProductPage"
 import { AddUserPages } from "../pages/user/AddUserPage"
 import { UpdateUserPages } from "../pages/user/UpdateUserPage"
 import { UserPages } from "../pages/user/UserPage"
+import { CategoryPages } from "../pages/category/CategoryPage"
+import { AddCategoryPages } from "../pages/category/AddCategoryPage"
+import { UpdateCategoryPages } from "../pages/category/UpdateCategoryPage"
 
 export const Layout = () => {
   return (
@@ -35,6 +38,10 @@ export const Layout = () => {
           <Route path='/internal' element={<InternalPages />} />
           <Route path='/addInternal' element={<AddInternalPages />} />
           <Route path='/internalUpdate/:id' element={<UpdateInternalPages />} />
+
+          <Route path='/category' element={<CategoryPages />} />
+          <Route path='/addCategory' element={<AddCategoryPages />} />
+          <Route path='/categoryUpdate/:id' element={<UpdateCategoryPages />} />
 
           <Route path='/user' element={<UserPages />} />
           <Route path='/addUser' element={<AddUserPages />} />
