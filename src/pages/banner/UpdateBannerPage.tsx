@@ -3,23 +3,32 @@ import bannerAPI from '../../api/banner'
 import { Banner } from '../../interfaces/banner.interfaces'
 import { motion } from 'framer-motion'
 import { Header } from '../../components/common/Header'
-import { Button, DatePicker, Form, Switch, Upload } from 'antd'
+import { Button, DatePicker, Form, Modal, Select, Switch, Upload } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import Input from '../../components/common/Input'
 import ButtonPrimary from '../../components/common/Button'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import dayjs from 'dayjs' // if you're using dayjs to handle dates
 
 export const UpdateBannerPages = () => {
   const [banner, setBanner] = useState<Banner>({})
   const [form] = Form.useForm()
   const { id } = useParams<{ id: string }>()
+  const [isModalVisible, setModalVisible] = useState(false);
+  const navigate = useNavigate()
+  const handleOk = () => {
+    console.log('is', isModalVisible)
+    setModalVisible(false);
+  }
 
-  const onFinish = (values: Banner) => {
+
+
+  const onFinish = async (values: Banner) => {
     console.log('Form data submitted:', banner)
     // Call the update API here with the new values
-    bannerAPI.updateBanner({...values }, id)
+    await bannerAPI.updateBanner({...values }, id)
     clearForm();
+    navigate('/banner')
   }
 
   const clearForm = () => {
@@ -63,60 +72,45 @@ export const UpdateBannerPages = () => {
           transition={{ duration: 1 }}
         >
           <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 16 }}
+            labelCol={{ span: 44 }}
+            wrapperCol={{ span: 136 }}
             layout='vertical'
             style={{ maxWidth: 2200 }}
             form={form}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete='off'
-            initialValues={{ remember: true }} // Optional for setting initial form values
           >
-            <Form.Item name='banner_name' label='Name'>
-              <Input />
+            <Form.Item name='title' label='Title' required>
+              <Input required />
             </Form.Item>
-
-            <Form.Item name='price' label='Price'>
-              <Input />
+            <Form.Item name='display_order' label='Display Order' required>
+              <Input required />
             </Form.Item>
-
-            <Form.Item name='stock_quantity' label='Stock'>
-              <Input />
-            </Form.Item>
-
-            <Form.Item name='expired_date' label='Expired Time'>
+            <Form.Item name='start_date' label='Start Time' required>
               <DatePicker />
             </Form.Item>
-
-            <Form.Item name='description' label='Description'>
-              <TextArea rows={4} />
+            <Form.Item name='end_date' label='End Time' required>
+              <DatePicker />
             </Form.Item>
-
+            <Form.Item name='description' label='Description' required>
+              <TextArea rows={4} required />
+            </Form.Item>
+            <Form.Item
+              label="Area ID"
+              name="area_id"
+              rules={[{ required: true, message: 'Please select your area_id!' }]}
+            >
+              <Select>
+                <Select.Option value={1}>1</Select.Option>
+                <Select.Option value={2}>2</Select.Option>
+                <Select.Option value={3}>3</Select.Option>
+                <Select.Option value={4}>4</Select.Option>
+              </Select>
+            </Form.Item>
             <Form.Item label='Status' valuePropName='checked' name='status'>
               <Switch />
             </Form.Item>
-
-            {/* <Form.Item label='Upload' name='image' valuePropName='fileList' getValueFromEvent={normFile}>
-              <Upload listType='picture-card' name='image' action='http://localhost:4000/banners/upload' beforeUpload={() => false}>
-                <button
-                  style={{
-                    border: 0,
-                    background: 'none'
-                  }}
-                  type='button'
-                >
-                  <PlusIcon />
-                  <div
-                    style={{
-                      marginTop: 8
-                    }}
-                  >
-                    Upload
-                  </div>
-                </button>
-              </Upload>
-            </Form.Item> */}
             <Form.Item>
               <div className='flex justify-center'>
                 <div className='grid grid-cols-2 items-center gap-4'>
@@ -126,6 +120,9 @@ export const UpdateBannerPages = () => {
                   <Button color='danger' variant='solid' onClick={clearForm}>
                     Clear
                   </Button>
+                  <Modal title='Submission Complete' open={isModalVisible} onOk={handleOk}>
+                    <p>Your form has been successfully submitted!</p>
+                  </Modal>
                 </div>
               </div>
             </Form.Item>

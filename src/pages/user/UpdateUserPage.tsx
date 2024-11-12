@@ -6,7 +6,7 @@
   import { Button, Form, Modal, Radio, Select, Switch } from 'antd'
   import Input from '../../components/common/Input'
   import ButtonPrimary from '../../components/common/Button'
-  import { useParams } from 'react-router-dom'
+  import { useNavigate, useParams } from 'react-router-dom'
   import dayjs from 'dayjs' // if you're using dayjs to handle dates
 
   export const UpdateUserPages = () => {
@@ -14,16 +14,16 @@
     const [form] = Form.useForm()
     const { id } = useParams<{ id: string }>()
     const [isModalVisible, setModalVisible] = useState(false);
+    const navigate = useNavigate()
     const [user, setUser] = useState<User>({
       url: '',
-      internal_name: '',
-
     })
 
-    const onFinish = (values: User) => {
+    const onFinish = async (values: User) => {
       console.log('Form data submitted:', values)
       // Call the update API here with the new values
-      userAPI.updateUser({ ...values, url: user.url}, id)
+      await userAPI.updateUser({ ...values, url: user.url}, id)
+      navigate('/user')
     }
 
     const handleOk = () => {

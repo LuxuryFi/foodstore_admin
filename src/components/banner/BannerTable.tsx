@@ -25,7 +25,12 @@ export const BannerTable = ({ banner }: BannerTableProps) => {
       title: 'Image',
       dataIndex: 'image_url',
       key: 'image_url',
-      render: (image_url: string) => <img src={image_url} width='100px' alt='Banner Image' />
+      render: (image_url: string) =>  <img
+      crossOrigin='anonymous'
+      src={`http://localhost:4000/public/uploads/${image_url}`}
+      width='100px'
+      alt='Banner Image'
+    />
     },
     {
       title: 'Description',

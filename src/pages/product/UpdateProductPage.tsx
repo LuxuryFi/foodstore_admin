@@ -7,28 +7,22 @@ import { Button, DatePicker, Form, Switch, Upload } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import Input from '../../components/common/Input'
 import ButtonPrimary from '../../components/common/Button'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import dayjs from 'dayjs' // if you're using dayjs to handle dates
 
 export const UpdateProductPages = () => {
   const [product, setProduct] = useState<Product>({})
   const [form] = Form.useForm()
   const { id } = useParams<{ id: string }>()
+  const navigate = useNavigate()
 
-  const onFinish = (values: Product) => {
+  const onFinish = async (values: Product) => {
     console.log('Form data submitted:', product)
     // Call the update API here with the new values
-    productAPI.updateProduct({...values, image: product.image }, id)
+    await productAPI.updateProduct({...values, image: product.image }, id)
     clearForm();
+    navigate('/product')
   }
-
-  const normFile = (e: any) => {
-    console.log('Upload event:', e); // Debug line to see the structure of e
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList || []; // Ensure it returns an array even if fileList is undefined
-  };
 
   const clearForm = () => {
     form.resetFields()

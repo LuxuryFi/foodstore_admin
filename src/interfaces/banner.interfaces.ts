@@ -26,7 +26,7 @@ export interface BannerPayload {
   updated_at?: Date;
   start_date?: Date;
   end_date?: Date;
-  image?: Image[]
+  image_url?: Image[]
 }
 
 export interface Image {

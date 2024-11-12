@@ -6,7 +6,7 @@
   import { Button, Form, Modal, Radio, Select, Switch } from 'antd'
   import Input from '../../components/common/Input'
   import ButtonPrimary from '../../components/common/Button'
-  import { useParams } from 'react-router-dom'
+  import { useNavigate, useParams } from 'react-router-dom'
   import dayjs from 'dayjs' // if you're using dayjs to handle dates
 
   export const UpdateInternalPages = () => {
@@ -15,24 +15,18 @@
     const { id } = useParams<{ id: string }>()
     const [isModalVisible, setModalVisible] = useState(false);
     const [internal, setInternal] = useState<Internal>({})
+    const navigate = useNavigate()
 
-    const onFinish = (values: Internal) => {
+    const onFinish = async (values: Internal) => {
       console.log('Form data submitted:', values)
       // Call the update API here with the new values
-      internalAPI.updateInternal({ ...values, url: internal.url}, id)
+      await internalAPI.updateInternal({ ...values, url: internal.url}, id)
+      navigate('/internal')
     }
 
     const handleOk = () => {
       console.log('is', isModalVisible)
       setModalVisible(false);
-    }
-
-    console.log(form.getFieldValue('gender'));
-    const normFile = (e: any) => {
-      if (Array.isArray(e)) {
-        return e
-      }
-      return e?.fileList
     }
 
     const clearForm = () => {
