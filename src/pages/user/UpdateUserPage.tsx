@@ -107,7 +107,7 @@
                   <Radio value={true}> Female </Radio>
                 </Radio.Group>
               </Form.Item>
-              <Form.Item label='Status' valuePropName='checked'>
+              <Form.Item label='Status' valuePropName='checked' name='status'>
               <Switch />
             </Form.Item>
               <Form.Item>

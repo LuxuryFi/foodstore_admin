@@ -38,7 +38,7 @@ const productAPI = {
       return response.data // Assuming the response data is an array of products
     } catch (error) {
       console.error('Error fetching products:', error)
-      return null // Return an empty array in case of an error
+      return {} // Return an empty array in case of an error
     }
   }
 }

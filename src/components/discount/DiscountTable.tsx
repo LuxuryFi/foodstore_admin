@@ -1,14 +1,19 @@
 import { motion } from 'framer-motion'
 import { Discount } from '../../interfaces/discount.interfaces'
 import { Pencil, Search, Trash2 } from 'lucide-react'
-import { Table } from 'antd'
+import { Modal, Table } from 'antd'
 import { Link } from 'react-router-dom'
+import discountAPI from '../../api/discount'
 
 interface DiscountTableProps {
   discount: Discount[]
 }
 
 export const DiscountTable = ({ discount }: DiscountTableProps) => {
+  const deleteDiscount = async (id: string) => {
+    await discountAPI.deleteDiscount(id);
+    window.location.reload();
+  }
 
   console.log('discount', discount)
   const columns = [
@@ -53,9 +58,21 @@ export const DiscountTable = ({ discount }: DiscountTableProps) => {
           <Link key={data.id} to={`/discountUpdate/${data.id}`}>
             <Pencil className='text-green-800' />
           </Link>
-          <Link key={data.id} to={`/discountDelete/${data.id}`}>
-            <Trash2 className='text-red-600 ml-2' />
-          </Link>
+          <Trash2 className='text-red-600 ml-2'  onClick={() => {
+            Modal.confirm({
+              title: 'Confirm',
+              content: 'Are you confirm to delete this?',
+              onOk: () => {
+                deleteDiscount(data.id.toString()); // Handle the delete logic
+              },
+              footer: (_, { OkBtn, CancelBtn }) => (
+                <>
+                  <CancelBtn />
+                  <OkBtn/>
+                </>
+              ),
+            });
+          }}/>
         </span>
       )
     }

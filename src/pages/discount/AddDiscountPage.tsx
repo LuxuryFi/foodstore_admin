@@ -3,7 +3,7 @@ import discountAPI from '../../api/discount'
 import { Discount, DiscountPayload } from '../../interfaces/discount.interfaces'
 import { motion } from 'framer-motion'
 import { Header } from '../../components/common/Header'
-import { Button, Form, Modal } from 'antd'
+import { Button, DatePicker, Form, Modal } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import Input from '../../components/common/Input'
 import ButtonPrimary from '../../components/common/Button'
@@ -14,8 +14,8 @@ export const AddDiscountPages = () => {
   const [form] = Form.useForm() // Get the form instance
   const [isModalVisible, setModalVisible] = useState(false);
   const onFinish = (values: DiscountPayload) => {
-    console.log('Form data submitted:', discount)
-    clearForm()
+    console.log('Form data submitted:', values)
+    // clearForm()
     setDiscount({ ...values })
   }
 
@@ -34,7 +34,7 @@ export const AddDiscountPages = () => {
 
   useEffect(() => {
     if (Object.keys(discount).length > 0) {
-      discountAPI.addDiscount(discount) // Add discount API call
+      discountAPI.addDiscount({ ...discount, discount_percentage: parseInt(discount.discount_percentage)}) // Add discount API call
       clearForm() // Clear form after submitting
 
       setTimeout(() => {
@@ -80,8 +80,23 @@ export const AddDiscountPages = () => {
             <Form.Item name='discount_name' label='Name' required={true}>
               <Input required={true}/>
             </Form.Item>
+            <Form.Item name='discount_code' label='Code' required={true}>
+              <Input required={true}/>
+            </Form.Item>
+            <Form.Item name='discount_percentage' label='Code'>
+              <Input />
+            </Form.Item>
+            <Form.Item name='price' label='Price'>
+              <Input/>
+            </Form.Item>
             <Form.Item name='description' label='Description' required={true}>
               <TextArea rows={4} required={true}/>
+            </Form.Item>
+            <Form.Item name='start_date' label='Start Time'  required={true}>
+              <DatePicker />
+            </Form.Item>
+            <Form.Item name='end_date' label='End Time'  required={true}>
+              <DatePicker />
             </Form.Item>
             <Form.Item>
               <div className='flex justify-center'>
@@ -98,7 +113,6 @@ export const AddDiscountPages = () => {
                     onOk={handleOk}
                   >
                      <p>Your form has been successfully submitted!</p>
-
                   </Modal>
                 </div>
               </div>

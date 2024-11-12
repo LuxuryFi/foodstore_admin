@@ -33,12 +33,13 @@ const discountAPI = {
   },
   async getOneDiscount(id: unknown): Promise<Discount> {
     const url = `/discounts/${id}`
+    console.log('url', url);
     try {
       const response = await axiosClient.get(url) // Or post if needed
       return response.data // Assuming the response data is an array of discounts
     } catch (error) {
       console.error('Error fetching discounts:', error)
-      return null // Return an empty array in case of an error
+      return {} // Return an empty array in case of an error
     }
   }
 }

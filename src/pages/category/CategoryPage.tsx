@@ -15,16 +15,16 @@ export const CategoryPages = () => {
   const [category, setCategory] = useState<Category[]>([])
 
   useEffect(() => {
-    const fetchCategorys = async () => {
+    const fetchCategories = async () => {
       try {
-        const categorys = await categoryAPI.getCategory()
-        setCategory(categorys) // Set the category state with fetched data
+        const categories = await categoryAPI.getCategory()
+        setCategory(categories) // Set the category state with fetched data
       } catch (error) {
-        console.error('Error fetching categorys:', error)
+        console.error('Error fetching categories:', error)
       }
     }
 
-    fetchCategorys()
+    fetchCategories()
   }, []) // Empty dependency array to run the effect only once
 
   console.log('produict', category)
@@ -42,7 +42,7 @@ export const CategoryPages = () => {
           transition={{ duration: 1 }}
         >
           <StatCard name='New Category' icon={Users} value={13123} color='#6366F1'></StatCard>
-          <StatCard name='Total categorys' icon={StickyNote} value={13123} color='#6366F1'></StatCard>
+          <StatCard name='Total categories' icon={StickyNote} value={13123} color='#6366F1'></StatCard>
           <StatCard name='Total payment' icon={ShoppingBag} value={13123} color='#F59E0B'></StatCard>
           <StatCard name='Total revenue' icon={DollarSignIcon} value={13123} color='#6366F1'></StatCard>
         </motion.div>

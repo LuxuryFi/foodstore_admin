@@ -15,6 +15,10 @@ import { UserPages } from "../pages/user/UserPage"
 import { CategoryPages } from "../pages/category/CategoryPage"
 import { AddCategoryPages } from "../pages/category/AddCategoryPage"
 import { UpdateCategoryPages } from "../pages/category/UpdateCategoryPage"
+import { AddDiscountPages } from "../pages/discount/AddDiscountPage"
+import { UpdateDiscountPages } from "../pages/discount/UpdateDiscountPage"
+import { AddBannerPages } from "../pages/banner/AddBannerPage"
+import { UpdateBannerPages } from "../pages/banner/UpdateBannerPage"
 
 export const Layout = () => {
   return (
@@ -48,7 +52,13 @@ export const Layout = () => {
           <Route path='/userUpdate/:id' element={<UpdateUserPages />} />
 
           <Route path='/banner' element={<BannerPages />} />
+          <Route path='/addBanner' element={<AddBannerPages />} />
+          <Route path='/bannerUpdate/:id' element={<UpdateBannerPages />} />
+
           <Route path='/discount' element={<DiscountPages />} />
+          <Route path='/addDiscount' element={<AddDiscountPages />} />
+          <Route path='/discountUpdate/:id' element={<UpdateDiscountPages />} />
+
         </Routes>
 
       </div>

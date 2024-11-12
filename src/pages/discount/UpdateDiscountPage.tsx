@@ -42,11 +42,13 @@ export const UpdateDiscountPages = () => {
     const fetchDiscount = async () => {
       try {
         const fetchedDiscount = await discountAPI.getOneDiscount(id) // Fetch discount by ID
-        // setDiscount(fetchedDiscount)
-        // Set initial values in the form
         form.setFieldsValue({
           ...fetchedDiscount,
+          start_date: dayjs(fetchedDiscount.start_date),
+          end_date: dayjs(fetchedDiscount.end_date),
         })
+
+        console.log('fetchedDiscount', fetchedDiscount)
 
         setDiscount(fetchedDiscount)
       } catch (error) {
@@ -68,23 +70,43 @@ export const UpdateDiscountPages = () => {
           transition={{ duration: 1 }}
         >
           <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 16 }}
+            labelCol={{
+              span: 44
+            }}
+            wrapperCol={{
+              span: 136
+            }}
             layout='vertical'
-            style={{ maxWidth: 2200 }}
+            style={{
+              maxWidth: 2200
+            }}
             form={form}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete='off'
-            initialValues={{ remember: true }} // Optional for setting initial form values
+            initialValues={{ remember: true }}
           >
-            <Form.Item name='discount_name' label='Name'>
+            <Form.Item name='discount_name' label='Name' required={true}>
+              <Input required={true}/>
+            </Form.Item>
+            <Form.Item name='discount_code' label='Code' required={true}>
+              <Input required={true}/>
+            </Form.Item>
+            <Form.Item name='discount_percentage' label='Code'>
               <Input />
             </Form.Item>
-            <Form.Item name='description' label='Description'>
-              <TextArea rows={4} />
+            <Form.Item name='price' label='Price'>
+              <Input/>
             </Form.Item>
-
+            <Form.Item name='description' label='Description' required={true}>
+              <TextArea rows={4} required={true}/>
+            </Form.Item>
+            <Form.Item name='start_date' label='Start Time'  required={true}>
+              <DatePicker />
+            </Form.Item>
+            <Form.Item name='end_date' label='End Time'  required={true}>
+              <DatePicker />
+            </Form.Item>
             <Form.Item label='Status' valuePropName='checked' name='status'>
               <Switch />
             </Form.Item>
@@ -103,7 +125,6 @@ export const UpdateDiscountPages = () => {
                     onOk={handleOk}
                   >
                      <p>Your form has been successfully submitted!</p>
-
                   </Modal>
                 </div>
               </div>

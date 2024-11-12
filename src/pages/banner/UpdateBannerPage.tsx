@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import productAPI from '../../api/product'
-import { Product } from '../../interfaces/product.interfaces'
+import bannerAPI from '../../api/banner'
+import { Banner } from '../../interfaces/banner.interfaces'
 import { motion } from 'framer-motion'
 import { Header } from '../../components/common/Header'
 import { Button, DatePicker, Form, Switch, Upload } from 'antd'
@@ -10,25 +10,17 @@ import ButtonPrimary from '../../components/common/Button'
 import { useParams } from 'react-router-dom'
 import dayjs from 'dayjs' // if you're using dayjs to handle dates
 
-export const UpdateProductPages = () => {
-  const [product, setProduct] = useState<Product>({})
+export const UpdateBannerPages = () => {
+  const [banner, setBanner] = useState<Banner>({})
   const [form] = Form.useForm()
   const { id } = useParams<{ id: string }>()
 
-  const onFinish = (values: Product) => {
-    console.log('Form data submitted:', product)
+  const onFinish = (values: Banner) => {
+    console.log('Form data submitted:', banner)
     // Call the update API here with the new values
-    productAPI.updateProduct({...values, image: product.image }, id)
+    bannerAPI.updateBanner({...values }, id)
     clearForm();
   }
-
-  const normFile = (e: any) => {
-    console.log('Upload event:', e); // Debug line to see the structure of e
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList || []; // Ensure it returns an array even if fileList is undefined
-  };
 
   const clearForm = () => {
     form.resetFields()
@@ -38,29 +30,30 @@ export const UpdateProductPages = () => {
     console.error('Form submission failed:', errorInfo)
   }
 
-  // Fetch product data on mount
+  // Fetch banner data on mount
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchBanner = async () => {
       try {
-        const fetchedProduct = await productAPI.getOneProduct(id) // Fetch product by ID
-        // setProduct(fetchedProduct)
+        const fetchedBanner = await bannerAPI.getOneBanner(id) // Fetch banner by ID
+        // setBanner(fetchedBanner)
         // Set initial values in the form
         form.setFieldsValue({
-          ...fetchedProduct,
-          expired_date: fetchedProduct?.expired_date ? dayjs(fetchedProduct?.expired_date) : null // Handling expired_date formatting
+          ...fetchedBanner,
+          start_date: fetchedBanner?.start_date ? dayjs(fetchedBanner?.start_date) : null, // Handling expired_date formatting
+          end_date: fetchedBanner?.end_date ? dayjs(fetchedBanner?.end_date) : null // Handling expired_date formatting
         })
 
-        setProduct(fetchedProduct)
+        setBanner(fetchedBanner)
       } catch (error) {
-        console.error('Error fetching product:', error)
+        console.error('Error fetching banner:', error)
       }
     }
-    fetchProduct()
+    fetchBanner()
   }, [id, form])
 
   return (
     <div className='flex-1 overflow-auto relative z-10'>
-      <Header title='Update Product' />
+      <Header title='Update Banner' />
 
       <main className='max-w-7x1 mx-auto py-6 px-4 lg:px-8 xl:px-20'>
         <motion.div
@@ -80,7 +73,7 @@ export const UpdateProductPages = () => {
             autoComplete='off'
             initialValues={{ remember: true }} // Optional for setting initial form values
           >
-            <Form.Item name='product_name' label='Name'>
+            <Form.Item name='banner_name' label='Name'>
               <Input />
             </Form.Item>
 
@@ -105,7 +98,7 @@ export const UpdateProductPages = () => {
             </Form.Item>
 
             {/* <Form.Item label='Upload' name='image' valuePropName='fileList' getValueFromEvent={normFile}>
-              <Upload listType='picture-card' name='image' action='http://localhost:4000/products/upload' beforeUpload={() => false}>
+              <Upload listType='picture-card' name='image' action='http://localhost:4000/banners/upload' beforeUpload={() => false}>
                 <button
                   style={{
                     border: 0,

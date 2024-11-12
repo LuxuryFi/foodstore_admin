@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import bannerAPI from '../../api/banner'
 import { Banner } from '../../interfaces/banner.interfaces'
 import { motion } from 'framer-motion'
 import { Users, StickyNote, ShoppingBag, DollarSignIcon } from 'lucide-react'
@@ -7,13 +8,14 @@ import { StatCard } from '../../components/common/StatCard'
 import CategoryDistributionChart from '../../components/banner/CategoryDistributionChart'
 import { BannerTable } from '../../components/banner/BannerTable'
 import { SaleTrendChart } from '../../components/banner/SalesTrendChart'
-import bannerAPI from '../../api/banner'
+import { Button } from 'antd'
+import { Link } from 'react-router-dom'
 
 export const BannerPages = () => {
   const [banner, setBanner] = useState<Banner[]>([])
 
   useEffect(() => {
-    const fetchbanners = async () => {
+    const fetchBanners = async () => {
       try {
         const banners = await bannerAPI.getBanner()
         setBanner(banners) // Set the banner state with fetched data
@@ -22,7 +24,7 @@ export const BannerPages = () => {
       }
     }
 
-    fetchbanners()
+    fetchBanners()
   }, []) // Empty dependency array to run the effect only once
 
   console.log('produict', banner)
@@ -44,7 +46,19 @@ export const BannerPages = () => {
           <StatCard name='Total payment' icon={ShoppingBag} value={13123} color='#F59E0B'></StatCard>
           <StatCard name='Total revenue' icon={DollarSignIcon} value={13123} color='#6366F1'></StatCard>
         </motion.div>
-
+        <Button
+          type='primary'
+          style={{
+            backgroundColor: '#166534',
+            padding: '1.5rem',
+            marginBottom: '1rem',
+            fontWeight: 600
+          }}
+          name='Add New Banner'
+          value='Add New Banner'
+        >
+          <Link to='/addBanner'>Add New Banner</Link>
+        </Button>
         <BannerTable banner={banner} />
 
         {/* CHARTs */}
