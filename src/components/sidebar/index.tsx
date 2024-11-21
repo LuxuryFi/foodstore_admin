@@ -5,14 +5,15 @@ import { useState } from 'react'
 import { isLogin } from '../../helpers/isLogin'
 
 const SIDEBAR_ITEMS = [
-  { name: 'Homepage', icon: BarChart, color: '#ffffff', path: '/' },
-  { name: 'User', icon: User2Icon, color: '#ffffff', path: '/user' },
-  { name: 'Internal User', icon: UserSquare2, color: '#ffffff', path: '/internal' },
+  { name: 'Homepage', icon: BarChart, color: '#F232ff', path: '/' },
+  { name: 'User', icon: User2Icon, color: '#B32A12', path: '/user' },
+  { name: 'Internal User', icon: UserSquare2, color: '#23EA12', path: '/internal' },
   { name: 'Category', icon: User2Icon, color: '#EC4899', path: '/category' },
   { name: 'Product', icon: User2Icon, color: '#F59E0B', path: '/product' },
   { name: 'Order', icon: ShoppingBag, color: '#6EE7B7', path: '/order' },
   { name: 'Banner', icon: CoinsIcon, color: '#3b82f6', path: '/banner' },
-  { name: 'Discount', icon: Drumstick, color: '#8b5cf6', path: '/discount' }
+  { name: 'Discount', icon: Drumstick, color: '#B32AD4', path: '/discount' },
+  // { name: 'Order', icon: Drumstick, color: '#285cf6', path: '/order' }
 ]
 
 

@@ -19,6 +19,9 @@ import { AddDiscountPages } from "../pages/discount/AddDiscountPage"
 import { UpdateDiscountPages } from "../pages/discount/UpdateDiscountPage"
 import { AddBannerPages } from "../pages/banner/AddBannerPage"
 import { UpdateBannerPages } from "../pages/banner/UpdateBannerPage"
+import { OrderPages } from "../pages/order/OrderPage"
+import { AddOrderPages } from "../pages/order/AddOrderPage"
+import { UpdateOrderPages } from "../pages/order/UpdateOrderPage"
 
 export const Layout = () => {
   return (
@@ -59,6 +62,9 @@ export const Layout = () => {
           <Route path='/addDiscount' element={<AddDiscountPages />} />
           <Route path='/discountUpdate/:id' element={<UpdateDiscountPages />} />
 
+          <Route path='/order' element={<OrderPages />} />
+          <Route path='/addOrder' element={<AddOrderPages />} />
+          <Route path='/orderUpdate/:id' element={<UpdateOrderPages />} />
         </Routes>
 
       </div>
