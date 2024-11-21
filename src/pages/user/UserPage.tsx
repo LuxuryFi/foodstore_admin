@@ -26,7 +26,7 @@ export const UserPages = () => {
     }
 
     fetchUsers()
-  }, [user]) // Empty dependency array to run the effect only once
+  }, []) // Empty dependency array to run the effect only once
 
   return (
     <div className='flex-1 overflow-auto relative z-10'>
@@ -61,12 +61,6 @@ export const UserPages = () => {
         </Button>
 
         <UserTable user={user} />
-
-        {/* CHARTs */}
-        <div className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 mt-10'>
-          <SaleTrendChart />
-          <CategoryDistributionChart />
-        </div>
       </main>
     </div>
   )

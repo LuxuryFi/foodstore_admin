@@ -83,8 +83,8 @@ export const AddDiscountPages = () => {
             <Form.Item name='discount_code' label='Code' required={true}>
               <Input required={true}/>
             </Form.Item>
-            <Form.Item name='discount_percentage' label='Code'>
-              <Input />
+            <Form.Item name='discount_percentage' label='Discount Percentage' required={true}>
+              <Input required={true}/>
             </Form.Item>
             <Form.Item name='price' label='Price'>
               <Input/>
@@ -93,10 +93,10 @@ export const AddDiscountPages = () => {
               <TextArea rows={4} required={true}/>
             </Form.Item>
             <Form.Item name='start_date' label='Start Time'  required={true}>
-              <DatePicker />
+              <DatePicker required={true}/>
             </Form.Item>
             <Form.Item name='end_date' label='End Time'  required={true}>
-              <DatePicker />
+              <DatePicker required={true}/>
             </Form.Item>
             <Form.Item>
               <div className='flex justify-center'>

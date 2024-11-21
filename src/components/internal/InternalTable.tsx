@@ -51,6 +51,15 @@ export const InternalTable = ({ internal }: InternalTableProps) => {
       sorter: true
     },
     {
+      title: 'Role',
+      dataIndex: 'role',
+      key: 'role',
+      sorter: true,
+      render: (role: number) => (
+        role === 0 ? 'ADMIN' : 'SELLER'
+      )
+    },
+    {
       title: 'Image',
       dataIndex: 'url',
       key: 'url',

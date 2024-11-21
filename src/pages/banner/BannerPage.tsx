@@ -61,11 +61,6 @@ export const BannerPages = () => {
         </Button>
         <BannerTable banner={banner} />
 
-        {/* CHARTs */}
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10'>
-          <SaleTrendChart />
-          <CategoryDistributionChart />
-        </div>
       </main>
     </div>
   )

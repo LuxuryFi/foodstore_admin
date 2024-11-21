@@ -1,14 +1,21 @@
 import { motion } from 'framer-motion'
 import { Banner } from '../../interfaces/banner.interfaces'
 import { Pencil, Search, Trash2 } from 'lucide-react'
-import { Table } from 'antd'
+import { Modal, Table } from 'antd'
 import { Link } from 'react-router-dom'
+import bannerAPI from '../../api/banner'
 interface BannerTableProps {
   banner: Banner[]
 }
 
 export const BannerTable = ({ banner }: BannerTableProps) => {
   console.log('prod', banner)
+
+  const deleteBanner= async (id: string) => {
+    await bannerAPI.deleteBanner(id);
+    window.location.reload();
+  }
+
   const columns = [
     {
       title: 'ID',
@@ -52,9 +59,21 @@ export const BannerTable = ({ banner }: BannerTableProps) => {
           <Link key={data.id} to={`/bannerUpdate/${data.id}`}>
             <Pencil />
           </Link>
-          <Link key={data.id} to={`/bannerDelete/${data.id}`}>
-            <Trash2 />
-          </Link>
+            <Trash2 className='text-red-600 ml-2'  onClick={() => {
+              Modal.confirm({
+                title: 'Confirm',
+                content: 'Are you confirm to delete this?',
+                onOk: () => {
+                  deleteBanner(data.id.toString()); // Handle the delete logic
+                },
+                footer: (_, { OkBtn, CancelBtn }) => (
+                  <>
+                    <CancelBtn />
+                    <OkBtn/>
+                  </>
+                ),
+              });
+            }}/>
         </span>
       )
     }

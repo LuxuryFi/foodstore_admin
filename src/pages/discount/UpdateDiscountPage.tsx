@@ -25,7 +25,7 @@ export const UpdateDiscountPages = () => {
   const onFinish = async (values: Discount) => {
     console.log('Form data submitted:', discount)
     // Call the update API here with the new values
-    await discountAPI.updateDiscount({...values }, id)
+    await discountAPI.updateDiscount({...values, discount_percentage: parseInt(values.discount_percentage)}, id)
     navigate('/discount')
   }
 
@@ -92,7 +92,7 @@ export const UpdateDiscountPages = () => {
             <Form.Item name='discount_code' label='Code' required={true}>
               <Input required={true}/>
             </Form.Item>
-            <Form.Item name='discount_percentage' label='Code'>
+            <Form.Item name='discount_percentage' label='Discount Percentage'>
               <Input />
             </Form.Item>
             <Form.Item name='price' label='Price'>

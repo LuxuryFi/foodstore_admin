@@ -60,12 +60,6 @@ export const InternalPages = () => {
           <Link to='/addInternal'>Add New Internal User</Link>
         </Button>
         <InternalTable internal={internal} />
-
-        {/* CHARTs */}
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10'>
-          <SaleTrendChart />
-          <CategoryDistributionChart />
-        </div>
       </main>
     </div>
   )
