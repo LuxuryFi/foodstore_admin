@@ -27,6 +27,23 @@ export const AddInternalPages = () => {
     }
   }
 
+  const validatePhone = async (_, value: string) => value && (value.length == 11 || value.length == 10) ? Promise.resolve() : Promise.reject(new Error('Phone number must be 10 or 11 characters'))
+
+  const validatePassword = async (_, value: any) => {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  
+    if (!value) {
+      throw new Error("Password is required!");
+    }
+  
+    if (!passwordRegex.test(value)) {
+      throw new Error(
+        "Password must include at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+      );
+    }
+  };
+
   const clearForm = () => {
     form.resetFields()
     setFileList([]) // Clear file list when form is cleared
@@ -118,10 +135,23 @@ export const AddInternalPages = () => {
             <Form.Item name='address' label='Address' required={true}>
               <Input required={true}/>
             </Form.Item>
-            <Form.Item name='phone' label='Phone' required={true}>
+            <Form.Item name='phone' label='Phone' rules={[
+              {
+                required: true,
+                message: 'Please input your phone number'
+              },
+              {
+                validator: validatePhone
+              }
+            ]}>
               <Input required={true}/>
             </Form.Item>
-            <Form.Item name='password' label='Password' required={true}>
+            <Form.Item name='password' label='Password'   rules={[
+                      { required: true, message: "Please input your password!" },
+                      {
+                        validator: validatePassword
+                      },
+                    ]}>
               <Input required={true}/>
             </Form.Item>
             <Form.Item
@@ -134,33 +164,57 @@ export const AddInternalPages = () => {
                 <Select.Option value={0}>Seller</Select.Option>
               </Select>
             </Form.Item>
-            <Form.Item name='email' label='Email' required={true}>
-              <Input required={true}/>
+            <Form.Item name='email' label='Email'  rules={[
+              {
+                type: 'email',
+                message: 'The input is not a valid email address!',
+              },
+              {
+                required: true,
+                message: 'Please input your email!',
+              },
+            ]}>              <Input required={true}/>
             </Form.Item>
-            <Form.Item label='Radio' name='gender'>
+            <Form.Item label='Radio' name='gender'   rules={[{ required: true, message: 'Please select a gender!' }]}
+            >
               <Radio.Group>
                 <Radio value={false}> Male </Radio>
                 <Radio value={true}> Female </Radio>
               </Radio.Group>
             </Form.Item>
-            <Form.Item label='Upload' name='url' valuePropName='fileList' getValueFromEvent={normFile}>
+            <Form.Item
+              label="Upload"
+              name="url"
+              valuePropName="fileList"
+              getValueFromEvent={normFile}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please upload a file!',
+                  validator: (_, value) =>
+                    value && value.length > 0
+                      ? Promise.resolve()
+                      : Promise.reject(new Error('Please upload a file!')),
+                },
+              ]}
+            >
               <Upload
-                listType='picture-card'
-                name='url'
-                action='http://localhost:4000/internals/upload'
+                listType="picture-card"
+                name="url"
+                action="http://localhost:4000/internals/upload"
                 onChange={onChange} // Handle file upload change
               >
                 <button
                   style={{
                     border: 0,
-                    background: 'none'
+                    background: 'none',
                   }}
-                  type='button'
+                  type="button"
                 >
                   <PlusIcon />
                   <div
                     style={{
-                      marginTop: 8
+                      marginTop: 8,
                     }}
                   >
                     Upload
@@ -168,6 +222,7 @@ export const AddInternalPages = () => {
                 </button>
               </Upload>
             </Form.Item>
+
 
             <Form.Item>
               <div className='flex justify-center'>

@@ -3,25 +3,25 @@ import axiosClient from '../axios.config'
 
 const userAPI = {
   addUser(user: User) {
-    const url = '/users'
+    const url = '/users/user'
     return axiosClient.post(url, user)
   },
   updateUser(user: User, id?: string) {
     if (id) {
-      const url = `/users/${id}`
+      const url = `/users/user/${id}`
       return axiosClient.put(url, { ...user, image: 'test' })
     }
     return null
   },
   deleteUser(id?: string) {
     if (id) {
-      const url = `/users/${id}`
+      const url = `/users/user/${id}`
       return axiosClient.delete(url)
     }
     return null
   },
   async getUser(): Promise<User[]> {
-    const url = '/users'
+    const url = '/users/user'
     try {
       const response = await axiosClient.get(url) // Or post if needed
       return response.data.data // Assuming the response data is an array of users
@@ -31,7 +31,7 @@ const userAPI = {
     }
   },
   async getOneUser(id: unknown): Promise<User | null> {
-    const url = `/users/${id}`
+    const url = `/users/user/${id}`
     try {
       const response = await axiosClient.get(url) // Or post if needed
       return response.data.data // Assuming the response data is an array of users

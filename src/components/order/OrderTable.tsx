@@ -41,42 +41,14 @@ export const OrderTable = ({ order }: OrderTableProps) => {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      render: (status) => {
-        status ? 'DONE' : 'CANCELLED'
-      }
+      render: (status: any) => 
+        status ? 'DONE' : 'SUBMIT'
     },
     {
       title: 'Created Date',
       dataIndex: 'created_at',
       key: 'created_at'
     },
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'x',
-      render: (data: Order) => (
-        <span className='flex items-center'>
-          <Link key={data.id} to={`/orderUpdate/${data.id}`}>
-            <Pencil className='text-green-800' />
-          </Link>
-          <Trash2 className='text-red-600 ml-2'  onClick={() => {
-            Modal.confirm({
-              title: 'Confirm',
-              content: 'Are you confirm to delete this?',
-              onOk: () => {
-                deleteOrder(data.id.toString()); // Handle the delete logic
-              },
-              footer: (_, { OkBtn, CancelBtn }) => (
-                <>
-                  <CancelBtn />
-                  <OkBtn/>
-                </>
-              ),
-            });
-          }}/>
-        </span>
-      )
-    }
   ]
 
   return (
